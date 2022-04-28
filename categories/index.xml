@@ -2,16 +2,16 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
         <title>Categories on kitty_Happy</title>
-        <link>https://example.com/categories/</link>
+        <link>https://kuailemao.io.github.io/categories/</link>
         <description>Recent content in Categories on kitty_Happy</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
-        <lastBuildDate>Thu, 28 Apr 2022 01:00:00 +0200</lastBuildDate><atom:link href="https://example.com/categories/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Thu, 28 Apr 2022 01:00:00 +0200</lastBuildDate><atom:link href="https://kuailemao.io.github.io/categories/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>博客</title>
-        <link>https://example.com/categories/%E5%8D%9A%E5%AE%A2/</link>
+        <link>https://kuailemao.io.github.io/categories/%E5%8D%9A%E5%AE%A2/</link>
         <pubDate>Thu, 28 Apr 2022 01:00:00 +0200</pubDate>
         
-        <guid>https://example.com/categories/%E5%8D%9A%E5%AE%A2/</guid>
+        <guid>https://kuailemao.io.github.io/categories/%E5%8D%9A%E5%AE%A2/</guid>
         <description></description>
         </item>
         
