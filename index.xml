@@ -2,16 +2,16 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
         <title>kitty_Happy</title>
-        <link>https://kuailemao.io.github.io/</link>
+        <link>https://example.com/</link>
         <description>Recent content on kitty_Happy</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
-        <lastBuildDate>Thu, 28 Apr 2022 01:00:00 +0200</lastBuildDate><atom:link href="https://kuailemao.io.github.io/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Thu, 28 Apr 2022 01:00:00 +0200</lastBuildDate><atom:link href="https://example.com/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>C#第三章笔记</title>
-        <link>https://kuailemao.io.github.io/posts/test-post/</link>
+        <link>https://example.com/posts/test-post/</link>
         <pubDate>Thu, 28 Apr 2022 01:00:00 +0200</pubDate>
         
-        <guid>https://kuailemao.io.github.io/posts/test-post/</guid>
+        <guid>https://example.com/posts/test-post/</guid>
         <description>&lt;!-- raw HTML omitted --&gt;
 &lt;p&gt;[TOC]&lt;/p&gt;
 &lt;h3 id=&#34;1c访问修饰符&#34;&gt;1、C#访问修饰符&lt;/h3&gt;
@@ -306,7 +306,7 @@
 &lt;/blockquote&gt;
 &lt;p&gt;在一个类中，定义一个字段，通常设定为私用，选中这个字段右击，在弹出的快捷菜单中选择：&lt;/p&gt;
 &lt;p&gt;“重构” → “封装字段” 选项。如图：&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://kuailemao.io.github.io/C:%5cUsers%5c34902%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20210927021931487.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://example.com/C:%5cUsers%5c34902%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20210927021931487.png&#34;
 	
 	
 	
