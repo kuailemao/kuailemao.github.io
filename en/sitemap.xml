@@ -2,58 +2,58 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://kuailemao.github.io.github.io/posts/test-post/</loc>
+    <loc>https://example.com/posts/test-post/</loc>
     <lastmod>2022-04-28T01:00:00+02:00</lastmod>
   </url><url>
-    <loc>https://kuailemao.github.io.github.io/categories/</loc>
-    <lastmod>2022-04-28T01:00:00+02:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="zh-cn"
-                href="https://kuailemao.github.io.github.io/zh-cn/categories/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://kuailemao.github.io.github.io/categories/"
-                />
-  </url><url>
-    <loc>https://kuailemao.github.io.github.io/tags/hugo/</loc>
-    <lastmod>2022-04-28T01:00:00+02:00</lastmod>
-  </url><url>
-    <loc>https://kuailemao.github.io.github.io/</loc>
+    <loc>https://example.com/categories/</loc>
     <lastmod>2022-04-28T01:00:00+02:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
-                href="https://kuailemao.github.io.github.io/zh-cn/"
+                href="https://example.com/zh-cn/categories/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://kuailemao.github.io.github.io/"
+                href="https://example.com/categories/"
                 />
   </url><url>
-    <loc>https://kuailemao.github.io.github.io/posts/</loc>
+    <loc>https://example.com/tags/hugo/</loc>
     <lastmod>2022-04-28T01:00:00+02:00</lastmod>
   </url><url>
-    <loc>https://kuailemao.github.io.github.io/tags/stack/</loc>
-    <lastmod>2022-04-28T01:00:00+02:00</lastmod>
-  </url><url>
-    <loc>https://kuailemao.github.io.github.io/tags/</loc>
+    <loc>https://example.com/</loc>
     <lastmod>2022-04-28T01:00:00+02:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
-                href="https://kuailemao.github.io.github.io/zh-cn/tags/"
+                href="https://example.com/zh-cn/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://kuailemao.github.io.github.io/tags/"
+                href="https://example.com/"
                 />
   </url><url>
-    <loc>https://kuailemao.github.io.github.io/categories/%E5%8D%9A%E5%AE%A2/</loc>
+    <loc>https://example.com/posts/</loc>
+    <lastmod>2022-04-28T01:00:00+02:00</lastmod>
+  </url><url>
+    <loc>https://example.com/tags/stack/</loc>
+    <lastmod>2022-04-28T01:00:00+02:00</lastmod>
+  </url><url>
+    <loc>https://example.com/tags/</loc>
+    <lastmod>2022-04-28T01:00:00+02:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh-cn"
+                href="https://example.com/zh-cn/tags/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://example.com/tags/"
+                />
+  </url><url>
+    <loc>https://example.com/categories/%E5%8D%9A%E5%AE%A2/</loc>
     <lastmod>2022-04-28T01:00:00+02:00</lastmod>
   </url>
 </urlset>
