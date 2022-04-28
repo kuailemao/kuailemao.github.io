@@ -1,0 +1,1545 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='Java阅读笔记'><title>Java核心技术阅读笔记</title>
+
+<link rel='canonical' href='https://example.com/posts/java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/'>
+
+<link rel="stylesheet" href="/scss/style.min.d9e0562edde3d2bdf9d3d81365095a29d062ddaaa5d671f22168e57dfdb18b4f.css"><meta property='og:title' content='Java核心技术阅读笔记'>
+<meta property='og:description' content='Java阅读笔记'>
+<meta property='og:url' content='https://example.com/posts/java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/'>
+<meta property='og:site_name' content='kitty_Happy'>
+<meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:tag' content='笔记' /><meta property='article:tag' content='Java' /><meta property='article:published_time' content='2022-04-28T09:49:00&#43;02:00'/><meta property='article:modified_time' content='2022-04-28T09:49:00&#43;02:00'/><meta property='og:image' content='https://example.com/posts/java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/mc.jpg' />
+<meta name="twitter:title" content="Java核心技术阅读笔记">
+<meta name="twitter:description" content="Java阅读笔记"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://example.com/posts/java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/mc.jpg' />
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/%E6%88%91%E7%9A%84%E7%8C%AB%E5%92%AA%E5%A4%B4%E5%83%8F_hu9148bc9c2f1f5191762316808b783c97_20775_300x0_resize_q75_box.jpg" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🧀</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">kitty_Happy</a></h1>
+            <h2 class="site-description">欢迎访问kitty_Happy 的博客,一起开始学习吧！</h2>
+        </div>
+    </header><ol class="social-menu">
+            
+                <li>
+                    <a 
+                        href='https://github.com/CaiJimmy/hugo-theme-stack'
+                        target="_blank"
+                        title="GitHub"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://twitter.com'
+                        target="_blank"
+                        title="Twitter"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-twitter" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M22 4.01c-1 .49 -1.98 .689 -3 .99c-1.121 -1.265 -2.783 -1.335 -4.38 -.737s-2.643 2.06 -2.62 3.737v1c-3.245 .083 -6.135 -1.395 -8 -4c0 0 -4.182 7.433 4 11c-1.872 1.247 -3.739 2.088 -6 2c3.308 1.803 6.913 2.423 10.034 1.517c3.58 -1.04 6.522 -3.723 7.651 -7.742a13.84 13.84 0 0 0 .497 -3.753c-.002 -.249 1.51 -2.772 1.818 -4.013z" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+
+        <div class="menu-bottom-section">
+            
+            
+                <li id="dark-mode-toggle">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <span>暗色模式</span>
+                </li>
+            
+        </div>
+    </ol>
+</aside>
+<main class="main full-width">
+    <article class="has-image main-article">
+    <header class="article-header">
+        <div class="article-image">
+            <a href="/posts/java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/">
+                <img src="/posts/java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/mc_huc294df3be37f1c8f668b4718bf6b9f6c_202198_800x0_resize_q75_box.jpg"
+                        srcset="/posts/java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/mc_huc294df3be37f1c8f668b4718bf6b9f6c_202198_800x0_resize_q75_box.jpg 800w, /posts/java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/mc_huc294df3be37f1c8f668b4718bf6b9f6c_202198_1600x0_resize_q75_box.jpg 1600w"
+                        width="800" 
+                        height="450" 
+                        loading="lazy"
+                        alt="Featured image of post Java核心技术阅读笔记" />
+                
+            </a>
+        </div>
+    
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/java/" >
+                Java
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/posts/java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/">Java核心技术阅读笔记</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            Java阅读笔记
+        </h3>
+        
+    </div>
+
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Apr 28, 2022</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    阅读时长: 7 分钟
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+</header>
+
+    <section class="article-content">
+    
+    
+    <!-- raw HTML omitted -->
+<h2 id="1java的基础程序设计结构">1、java的基础程序设计结构</h2>
+<p>[toc]</p>
+<h4 id="11一个简单的-java-应用程序">1.1、一个简单的 java 应用程序</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Hello</span><span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">){</span>
+</span></span><span class="line"><span class="cl">        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;HelloWorld&#34;</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>​		注意 ：java区分大小写，如果大小写拼写错误（例如：将 main 拼写成 Main），程序将无法运行，java的大括号都是一 一对应的，打代码时应该两个大括号一起打出来然后回车。</p>
+<p>​		逐一分析这段代码：
+​		1、public关键字 ：称为访问修饰符，这些修饰符用于控制程序的其他部分对这段代码的访问级别。</p>
+<p>​		2、class关键字 : 表明 java 程序用的全部内容都包含在类中。</p>
+<p>​		3、Hello : 表示类名，可以随意修改，须符合命名规范，不能是关键字。</p>
+<p>​		4、static关键字 ： static关键字可以用来修饰代码块表示静态代码块，修饰成员变量表示全局静态成员变量，修饰方法表示静态方法。被static关键字修饰的内容都是静态的。</p>
+<p>​		5、void关键字 ： 表示方法的返回值类型，可更改为其他的数据类型，void表示没有返回值。</p>
+<p>​		6、main ： 方法名，main方法是整个程序的入口方法，是一个比较特殊的方法，括号里面的是main方法的参数，main方法括号里面放了一个String类型的数组参数，如有需求可在编译的时候赋值。</p>
+<p>​		7、main方法里面的是java的输出语句用于向控制台输出，使用了 System.out 对象并调用了它的 println 方法。</p>
+<h4 id="12java命名规范">1.2、java命名规范</h4>
+<p>​		java的命名应：类名是以大写字母开头的名词。如果名字由多个单词组成，每个单词的第一个字母都应该大写（这种在一个单词中间使用大写字母的方式称为骆驼命名法（camel case）。以其自身为例，应该写成 CamelCase）
+代码的文件名必须与public修饰的类名相同，并且public修饰的类只能有一个，并用 .java 作为扩展名。</p>
+<h4 id="13注释">1.3、注释</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Hello</span><span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="cm">/**这是文档注释*/</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">){</span>
+</span></span><span class="line"><span class="cl">       	<span class="c1">//这是单行注释
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        
+</span></span><span class="line"><span class="cl">        <span class="cm">/*
+</span></span></span><span class="line"><span class="cl"><span class="cm">        这是多行注释
+</span></span></span><span class="line"><span class="cl"><span class="cm">        */</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>单行注释：只能一行， //后面区域为注释区域</p>
+<p>多行注释：可以多行，/*里面的为注释区域，可以多行*/</p>
+<p>文档注释： 可以多行，/**这里面为注释区域，可以多行*/</p>
+<p><strong>注释：</strong> java程序执行的时候不会执行注释里面的内容，单行注释或多行注释可用于说明或解释某段程序，文档注释可以用来描述 某个类或方法 可以使用 Javadoc 工具生成信息，并且输出解释文件</p>
+<h4 id="14数据类型">1.4、数据类型</h4>
+<p>​		java 是一种强类型语言。这就意味着必须为每一个变量声明一种类型。在java中，一共有8种基本类型、其中4种整型、2种浮点类型、1种字符类型 char（用于表示 Unicode 编码的代码单元）</p>
+<h5 id="141整型">1.4.1、整型</h5>
+<p>​		整型用于表示没有小数部分的数值，允许是负数。java提供了 4 种整型</p>
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th style="text-align:center">类型</th>
+<th style="text-align:center">储存需求</th>
+<th style="text-align:center">取值范围</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">int</td>
+<td style="text-align:center">4 字节</td>
+<td style="text-align:center">-2 147 483 648 ~ 2 147 483 647（刚刚超过20亿）</td>
+</tr>
+<tr>
+<td style="text-align:center">short</td>
+<td style="text-align:center">2 字节</td>
+<td style="text-align:center">-32 768 ~ 32 767</td>
+</tr>
+<tr>
+<td style="text-align:center">long</td>
+<td style="text-align:center">8 字节</td>
+<td style="text-align:center">-9 223 372 036 854 775 808 ~ 9 223 372 036 854 775 807</td>
+</tr>
+<tr>
+<td style="text-align:center">byte</td>
+<td style="text-align:center">1 字节</td>
+<td style="text-align:center">-128 ~ 127</td>
+</tr>
+</tbody>
+</table></div>
+<p>​		通常情况下，int 类型最常用。如果你想要表示整个地球的居中人口，就需要使用 long 类型。byte 和 short 类型主要用于特定的应用场合。</p>
+<p>​		在 java 中，整型的范围与运行 java 代码的机器无关。这就解决了软件从一个平台移植到另一个平台，或者在同一个平台中的不同操作系统之间进行移植给程序员带来的诸多问题。</p>
+<p>​		长整数数值（long）使用时需要一个后辍 L 或 l （如 1433223L）</p>
+<h5 id="142浮点类型">1.4.2、浮点类型</h5>
+<p>​		浮点类型用于表示有小数部分的数值。在 java中有两种浮点类型。</p>
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th style="text-align:center">类型</th>
+<th style="text-align:center">存储需求</th>
+<th style="text-align:center">取值范围</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">float</td>
+<td style="text-align:center">4 字节</td>
+<td style="text-align:center">大约 +/- 3.402 823 47E+38F（有效位数为 6 ~ 7位）</td>
+</tr>
+<tr>
+<td style="text-align:center">double</td>
+<td style="text-align:center">8 字节</td>
+<td style="text-align:center">大约 +/- 1.797 693 134 862 315 70E+308（有效位数为15位）</td>
+</tr>
+</tbody>
+</table></div>
+<p>​		double 表示这种类型的数值精度是 float 类型的两倍（有人称之为双精度浮点数）。一般情况下，double类型最常用。</p>
+<p>​		如果想用float 类型的数值需要加后辍 F 或 f（如 3.14F） 。如果不加 F 或 f 的话（如 3.14）java会默认为double类型</p>
+<h5 id="143char-类型">1.4.3、char 类型</h5>
+<p>​	char 类型的字面量值要用单引号括起来。例如：&lsquo;A&rsquo; 是编码值为 65 的字符常量。它与 &ldquo;A&rdquo; 不同，&ldquo;A&rdquo; 是包含一个字符串 A 的字符串。char 类型的值可以表示十六进制值，其范围从 \u0000 到 \uFFFF。例如，\u2122表示商标符号（™）</p>
+<p>​		除了转义序列\u 之外，还有一些用于表示特殊字符的转义序列：</p>
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th style="text-align:center">转义序列</th>
+<th style="text-align:center">名称</th>
+<th style="text-align:center">Unicode值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">\b</td>
+<td style="text-align:center">退格</td>
+<td style="text-align:center">\u0008</td>
+</tr>
+<tr>
+<td style="text-align:center">\t</td>
+<td style="text-align:center">一个制表位</td>
+<td style="text-align:center">\u0009</td>
+</tr>
+<tr>
+<td style="text-align:center">\n</td>
+<td style="text-align:center">换行</td>
+<td style="text-align:center">\u000a</td>
+</tr>
+<tr>
+<td style="text-align:center">\r</td>
+<td style="text-align:center">回车</td>
+<td style="text-align:center">\u000d</td>
+</tr>
+<tr>
+<td style="text-align:center">\&quot;</td>
+<td style="text-align:center">双引号</td>
+<td style="text-align:center">\u0027</td>
+</tr>
+<tr>
+<td style="text-align:center">\&rsquo;</td>
+<td style="text-align:center">单引号</td>
+<td style="text-align:center">\u0027</td>
+</tr>
+<tr>
+<td style="text-align:center">\\</td>
+<td style="text-align:center">反斜杠</td>
+<td style="text-align:center">\u005c</td>
+</tr>
+</tbody>
+</table></div>
+<h5 id="144boolean-类型">1.4.4、boolean 类型</h5>
+<p>​		boolean（布尔）类型有两个值：false 和 true，用来判定条件。整数值和布尔值之间不能进行相互转换。</p>
+<h4 id="15变量与常量">1.5、变量与常量</h4>
+<p>​		使用变量来存储值。常量就是值不变的变量。</p>
+<h5 id="151声明变量">1.5.1、声明变量</h5>
+<p>​		在java中，每个变量都有一个类型。在声明变量时，先指定变量的类型，然后是变量名。</p>
+<p>​		举例：double salary;
+​					int age;
+​					long renko;
+​					boolean dool;</p>
+<p>变量命名不能以数字开头，可以使用 &quot; $ _ &ldquo;,不能是java的关键字。</p>
+<h5 id="152变量初始化">1.5.2、变量初始化</h5>
+<p>​		声明一个变量之后，必须用赋值语句对变量进行初始化，未初始化就使用变量是 <!-- raw HTML omitted -->错误<!-- raw HTML omitted --> 的。</p>
+<p>​		例如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">age</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">age</span><span class="o">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>​		想要对一个已经声明过的变量进行赋值，需要使用 &quot; = &quot; 把右边的值赋给左边的变量，如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">age</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">age</span> <span class="o">=</span> <span class="n">18</span><span class="o">;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>​		也可以把变量的声明和初始化放在同一行。如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">age</span> <span class="o">=</span> <span class="n">18</span><span class="o">;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h5 id="153常量">1.5.3、常量</h5>
+<p>​		在java中，用关键字 final 声明常量。如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">final String NAME = &#34;zhangsan&#34;;
+</span></span><span class="line"><span class="cl">final int AGE = 3;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>​		关键字 final 表示这个变量只能被赋值一次。一旦赋值之后，就不能够再更改了，命名规范上，常量名使用 <!-- raw HTML omitted -->全大写字母<!-- raw HTML omitted --> 命名。</p>
+<p>​		如果希望某个常量可以在一个类的多个方法中使用，通常将这些常量称为类常量。可以使用关键字 static final 设置一个类常量。如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Hello</span><span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">static</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">NANE</span> <span class="o">=</span> <span class="s">&#34;zhangsan&#34;</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">){</span>
+</span></span><span class="line"><span class="cl">        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">name</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>​		注意：类常量需要定义在方法的外部，类的里面。定义之后类里面的方法都可以使用。</p>
+<h5 id="154枚举类型">1.5.4、枚举类型</h5>
+<p>​		自定义枚举类型。枚举类型包括有限个命名的值。如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">enum</span> <span class="n">Size</span><span class="o">{</span><span class="n">SMALL</span><span class="o">,</span><span class="n">MEDIUM</span><span class="o">,</span><span class="n">LARGE</span><span class="o">,</span><span class="n">EXTRA_LARGE</span><span class="o">};</span>
+</span></span><span class="line"><span class="cl"><span class="c1">//声明这种类型的变量：
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">Size</span> <span class="n">s</span> <span class="o">=</span> <span class="n">Size</span><span class="o">.</span><span class="na">MEDIUM</span><span class="o">;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>​		Size 类型的变量只能存储这个类型声明中给定的某个枚举值，或者特殊值 null , null 表示这个变量没有设置任何值。</p>
+<h4 id="16运算符">1.6、运算符</h4>
+<p>​		java 提供了一组丰富的算术和逻辑运算符以及数学函数。</p>
+<h5 id="161算术运算符">1.6.1、算术运算符</h5>
+<p>​		在 java 中，使用算术运算符 +（加）、-（减）、*（乘）、/（除）运算。如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">s1</span> <span class="o">=</span> <span class="n">8</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">s2</span> <span class="o">=</span> <span class="n">4</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="c1">//加
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">int</span> <span class="n">s3</span> <span class="o">=</span> <span class="n">s1</span> <span class="o">+</span> <span class="n">s2</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="c1">//减
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">int</span> <span class="n">s3</span> <span class="o">=</span> <span class="n">s1</span> <span class="o">-</span><span class="n">s2</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="c1">//乘
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">int</span> <span class="n">s3</span> <span class="o">=</span> <span class="n">s1</span> <span class="o">*</span> <span class="n">s2</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="c1">//除
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">int</span> <span class="n">s3</span> <span class="o">=</span> <span class="n">s1</span> <span class="o">/</span> <span class="n">s2</span><span class="o">;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>​		需要注意：整数被 0 除将会产生一个异常，而浮点数被 0 除将会得到无穷大或 NaN 结果。</p>
+<h5 id="162数学函数与常量">1.6.2、数学函数与常量</h5>
+<p>​		在 Math 类中，包含了各种各样的数学函数。在编写不同类别的程序时，可能需要的函数也不同。</p>
+<p>​		想要计算一个数值的平方根，可以使用 sqrt 方法：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kt">double</span> <span class="n">x</span> <span class="o">=</span> <span class="n">4</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="kt">double</span> <span class="n">y</span> <span class="o">=</span> <span class="n">Math</span><span class="o">.</span><span class="na">sqrt</span><span class="o">(</span><span class="n">x</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">y</span><span class="o">);</span><span class="c1">//输出
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>​		在 java 中，没有幂运算符，因此需要借助于 Math 类的 pow 方法。如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kt">double</span> <span class="n">y</span> <span class="o">=</span> <span class="n">Math</span><span class="o">.</span><span class="na">pow</span><span class="o">(</span><span class="n">x</span><span class="o">,</span><span class="n">a</span><span class="o">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>​		pow 方法有两个 double 类型的参数，其返回结果也为 double 类型。</p>
+<p>​		flooMod 方法的目的是解决一个长期存在的有关整数余数的问题。考虑表达式 n % 2。如果 n 是偶数，这个表达式为 0 ；如果 n 是奇数，表达式则为 1。当然，除非 n 是负数。如果 n 为负，这个表达式则为 -1；</p>
+<blockquote>
+<p>Math 类提供了一些常用的三角函数：</p>
+<p>​		Math.sin
+​		Math.cos
+​		Math.tan
+​		Math.atan
+​		Math.atan2
+​		还有指数函数以及它的反函数——自然对数以及以 10 为底的对数：</p>
+<p>​		Math.exp
+​		Math.log
+​		Math.log10</p>
+<p>​		最后，java还提供了两个用于表示 π 和 e 常量的最接近的近似值：</p>
+<p>​		Math.PI
+​		Math.E</p>
+</blockquote>
+<h5 id="163数值类型之间的转换">1.6.3、数值类型之间的转换</h5>
+<p>​		经常需要将一种数值类型转换为另一种数值类型。</p>
+<p><img src="/C:%5cUsers%5c34902%5cDesktop%5cjava%e6%95%b0%e6%8d%ae%e7%b1%bb%e5%9e%8b%e8%bd%ac%e6%8d%a2.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<p>​		在上图中，有 6 个实线箭头，表示无信息丢失的转换；另外有 3 个虚线箭头，表示可能有精度损失的转换。</p>
+<p>​		当用一个二元运算符连接两个值时（例如 n + f，n 是整数，f是浮点数），先要将两个操作数转换为同一种类型，然后再进行计算。</p>
+<blockquote>
+<ul>
+<li>如果两个操作数中有一个是 double 类型，另一个操作数就会转换为 double 类型。</li>
+<li>否则，如果其中一个操作数是 float 类型，另一个操作数将会转换为 float。</li>
+<li>否则，如果其中一个操作数是 long 类型，另一个操作数将会转换为 long 类型。</li>
+<li>否则，两个操作数都将被转换为 int 类型</li>
+</ul>
+</blockquote>
+<h5 id="164强制类型转换">1.6.4、强制类型转换</h5>
+<p>​		在必要的时候，int 类型的值将会自动地转换为 double 类型。但有时候也需要将 double 转换为int ，在 java 中，允许进行这种数值之间的类型转换，当然有可能会丢失一些信息。这种可能损失信息的转换要通过 强制类型转换来完成。强制类型转换的语法格式是在圆括号中给出想要转换的目标类型，后面紧跟待转换的变量名。如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kt">double</span> <span class="n">s1</span> <span class="o">=</span> <span class="n">8</span><span class="o">.</span><span class="na">88</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">s2</span> <span class="o">=</span> <span class="o">(</span><span class="kt">int</span><span class="o">)</span><span class="n">s1</span><span class="o">;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>​		s2的结果是 8 ；</p>
+<p>​		还可以调用 Math 类 round 方法，转换后的结果是四舍五入后的结果。如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kt">double</span> <span class="n">s1</span> <span class="o">=</span> <span class="n">8</span><span class="o">.</span><span class="na">88</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">s2</span> <span class="o">=</span> <span class="o">(</span><span class="kt">int</span><span class="o">)</span> <span class="n">Math</span><span class="o">.</span><span class="na">round</span><span class="o">(</span><span class="n">s1</span><span class="o">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>​		s2 的结果是 9 ；</p>
+<h5 id="165结合赋值和运算符">1.6.5、结合赋值和运算符</h5>
+<p>​		可以在赋值中使用二元运算符，这是一种很方便的简写形式。如</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">x</span> <span class="o">+=</span> <span class="n">4</span><span class="o">;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>​		等价于：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">4</span><span class="o">;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>​		也可以 +=、-=、/=、*=、%=……</p>
+<h5 id="167自增与自减运算符">1.6.7、自增与自减运算符</h5>
+<blockquote>
+<p>自增：变量本身加 1
+自减：变量本身减 1</p>
+</blockquote>
+<p>java 里面有两种形式：分别是：</p>
+<ul>
+<li>运算符放在操作数后面的</li>
+<li>运算符放在操作数前面</li>
+</ul>
+<p>如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">age</span> <span class="o">=</span> <span class="n">18</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="c1">//第一种形式
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">age</span><span class="o">++;</span>
+</span></span><span class="line"><span class="cl"><span class="n">age</span><span class="o">--;</span>
+</span></span><span class="line"><span class="cl"><span class="c1">//第二章形式
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="o">++</span><span class="n">age</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="o">--</span><span class="n">age</span><span class="o">;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>运算符在前面是先 加/减 1在计算</p>
+<p>运算符在后面是先计算在 加/减 1</p>
+</blockquote>
+<h5 id="168关系和-逻辑-运算符">1.6.8、关系和 逻辑 运算符</h5>
+<blockquote>
+<p>关系运算符：</p>
+</blockquote>
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th style="text-align:center">运算符</th>
+<th style="text-align:center">结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">==</td>
+<td style="text-align:center">等于</td>
+</tr>
+<tr>
+<td style="text-align:center">!=</td>
+<td style="text-align:center">不等于</td>
+</tr>
+<tr>
+<td style="text-align:center">&gt;</td>
+<td style="text-align:center">大于</td>
+</tr>
+<tr>
+<td style="text-align:center">&lt;</td>
+<td style="text-align:center">小于</td>
+</tr>
+<tr>
+<td style="text-align:center">&gt;=</td>
+<td style="text-align:center">大于或等于</td>
+</tr>
+<tr>
+<td style="text-align:center">&lt;=</td>
+<td style="text-align:center">大于或等于</td>
+</tr>
+</tbody>
+</table></div>
+<blockquote>
+<p>boolean（布尔）</p>
+</blockquote>
+<p>值：false（错误）true（正确）</p>
+<blockquote>
+<p>逻辑运算符</p>
+</blockquote>
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th style="text-align:center">运算符</th>
+<th style="text-align:center">用法</th>
+<th style="text-align:center">含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">&amp;&amp;</td>
+<td style="text-align:center">x &amp;&amp; y</td>
+<td style="text-align:center">逻辑与（短路与）</td>
+</tr>
+<tr>
+<td style="text-align:center">&amp;</td>
+<td style="text-align:center">x &amp; y</td>
+<td style="text-align:center">逻辑与</td>
+</tr>
+<tr>
+<td style="text-align:center">||</td>
+<td style="text-align:center">x || y</td>
+<td style="text-align:center">逻辑或（短路或）</td>
+</tr>
+<tr>
+<td style="text-align:center">|</td>
+<td style="text-align:center">x | y</td>
+<td style="text-align:center">逻辑或</td>
+</tr>
+<tr>
+<td style="text-align:center">！</td>
+<td style="text-align:center">！x</td>
+<td style="text-align:center">逻辑非</td>
+</tr>
+<tr>
+<td style="text-align:center">^</td>
+<td style="text-align:center">x ^ y</td>
+<td style="text-align:center">逻辑异或</td>
+</tr>
+</tbody>
+</table></div>
+<blockquote>
+<p>&amp;&amp; 与 &amp;：两边都为 true 则为 true ，不然 false，&amp;&amp; 要是第一个表达式为 false 那么它就不可能是 true 就不会在看右边的了，&amp; 两边都一定会看。</p>
+</blockquote>
+<blockquote>
+<p>||：其中一边为 true 则为 true ，不然 false，要是第一个表达式为 true那么它就不可能是 false 就不会在看右边的了，| 两边都会看。</p>
+</blockquote>
+<blockquote>
+<p>!：相反的，加上逻辑非会把最终结果反过来，false 变 true ，true 变 false。</p>
+</blockquote>
+<blockquote>
+<p>^：如果两边不一样则结果为 true ，如果两边一样 则 结果为false。</p>
+</blockquote>
+<p>如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">s1</span> <span class="o">=</span> <span class="n">10</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">s2</span> <span class="o">=</span> <span class="n">11</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">if</span><span class="o">(</span><span class="n">s1</span> <span class="o">==</span> <span class="n">s2</span> <span class="o">&amp;&amp;</span> <span class="n">s1</span> <span class="o">&gt;</span> <span class="n">s2</span><span class="o">){</span><span class="c1">//结果为false
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;true&#34;</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span><span class="k">else</span><span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;false&#34;</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h5 id="169三元运算符">1.6.9、三元运算符</h5>
+<blockquote>
+<p>语法：表达式 ？true ：false；</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">s1</span> <span class="o">=</span> <span class="n">10</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">s2</span> <span class="o">=</span> <span class="n">11</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">s1</span> <span class="o">&gt;</span> <span class="n">s2</span> <span class="o">?</span> <span class="s">&#34;true&#34;</span><span class="o">:</span><span class="s">&#34;false&#34;</span><span class="o">;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>如果 左边表达式结果为 true 就返回 &ldquo;true&rdquo; 的内容</p>
+</blockquote>
+<blockquote>
+<p>如果 左边的表达式结果为 false 就返回 &ldquo;false&rdquo; 的内容</p>
+</blockquote>
+<h5 id="1610位运算符">1.6.10、位运算符</h5>
+<p>​		位运算符是直接对数字底层 二进制进行操作的</p>
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th style="text-align:center">位运算符</th>
+<th style="text-align:center">名称</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">&amp;</td>
+<td style="text-align:center">按位与</td>
+</tr>
+<tr>
+<td style="text-align:center">|</td>
+<td style="text-align:center">按位或</td>
+</tr>
+<tr>
+<td style="text-align:center">~</td>
+<td style="text-align:center">取反运算符</td>
+</tr>
+<tr>
+<td style="text-align:center">^</td>
+<td style="text-align:center">异或运算符</td>
+</tr>
+<tr>
+<td style="text-align:center">&laquo;</td>
+<td style="text-align:center">左移运算符</td>
+</tr>
+<tr>
+<td style="text-align:center">&raquo;</td>
+<td style="text-align:center">右移运算符</td>
+</tr>
+<tr>
+<td style="text-align:center">&raquo;&gt;</td>
+<td style="text-align:center">无符号右移运算符</td>
+</tr>
+</tbody>
+</table></div>
+<blockquote>
+<p>&amp; 按位与：两个为 1 则为 1 ，不然为 0</p>
+</blockquote>
+<blockquote>
+<p>| 按位或：一个为 1 则为 1 ， 不然为 0</p>
+</blockquote>
+<blockquote>
+<p>~ 取反：1 为 0 ，0 为 1</p>
+</blockquote>
+<blockquote>
+<p>^ 异或：不一样则为 1 ，不然为 0</p>
+</blockquote>
+<blockquote>
+<p>&laquo; 左移运算符：二进制左移两位，右边补0</p>
+</blockquote>
+<blockquote>
+<p>&gt;&gt; 右移运算符：二进制右移两位，正数左边第一位补0，负数补1</p>
+</blockquote>
+<blockquote>
+<p>&gt;&raquo;无符号右移运算符：无符号右移运算符和右移运算符的主要区别在于负数的计算，无符号右移是高位补0，移多少位补多少个0</p>
+</blockquote>
+<h5 id="1611括号与运算符级别">1.6.11、括号与运算符级别</h5>
+<ul>
+<li>java的运算符都有自己的优先级,有（）会先执行（）里面的。</li>
+</ul>
+<blockquote>
+<p>​	例如：由于 &amp;&amp; 的优先级比 || 的优先级比 || 的优先级高，所以表达式</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">a</span> <span class="o">&amp;&amp;</span> <span class="n">b</span> <span class="o">||</span> <span class="n">c</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>等价于</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="o">(</span><span class="n">a</span> <span class="o">&amp;&amp;</span> <span class="n">b</span><span class="o">)</span> <span class="o">||</span> <span class="n">c</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>运算符优先级：</p>
+</blockquote>
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th style="text-align:center">运算符</th>
+<th style="text-align:center">结合性</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">[ ] . ( )(方法调用)</td>
+<td style="text-align:center">有左向右</td>
+</tr>
+<tr>
+<td style="text-align:center">! ~ ++ &ndash; +（一元运算） -（一元运算）( )（强制类型转换）new</td>
+<td style="text-align:center">从右向左</td>
+</tr>
+<tr>
+<td style="text-align:center">* / %</td>
+<td style="text-align:center">有左向右</td>
+</tr>
+<tr>
+<td style="text-align:center">+ -</td>
+<td style="text-align:center">有左向右</td>
+</tr>
+<tr>
+<td style="text-align:center">&laquo;    &raquo;   &raquo;&gt;</td>
+<td style="text-align:center">有左向右</td>
+</tr>
+<tr>
+<td style="text-align:center">&lt;  &lt;=  &gt;  &gt;=  instanceof</td>
+<td style="text-align:center">有左向右</td>
+</tr>
+<tr>
+<td style="text-align:center">==  !=</td>
+<td style="text-align:center">有左向右</td>
+</tr>
+<tr>
+<td style="text-align:center">&amp;</td>
+<td style="text-align:center">有左向右</td>
+</tr>
+<tr>
+<td style="text-align:center">^</td>
+<td style="text-align:center">有左向右</td>
+</tr>
+<tr>
+<td style="text-align:center">|</td>
+<td style="text-align:center">有左向右</td>
+</tr>
+<tr>
+<td style="text-align:center">&amp;&amp;</td>
+<td style="text-align:center">有左向右</td>
+</tr>
+<tr>
+<td style="text-align:center">||</td>
+<td style="text-align:center">有左向右</td>
+</tr>
+<tr>
+<td style="text-align:center">? :</td>
+<td style="text-align:center">从右向左</td>
+</tr>
+<tr>
+<td style="text-align:center">=   +=   -=   *=   /=   &amp;=   |=   ^=   &laquo;=   &raquo;=   &raquo;&gt;=</td>
+<td style="text-align:center">从右向左</td>
+</tr>
+</tbody>
+</table></div>
+<h4 id="17字符串">1.7、字符串</h4>
+<p>​		java 没有内置的字符串类型，而是在标准 java 类库中提供了一个预定类，很自然地叫做 String。每个用双引号括起来地字符串都是 String 类的一个实例：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">String</span> <span class="n">name</span> <span class="o">=</span> <span class="s">&#34;&#34;</span><span class="o">;</span><span class="c1">//空字符串
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">String</span> <span class="n">name</span> <span class="o">=</span> <span class="s">&#34;zhangsan&#34;</span><span class="o">;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h5 id="171子串">1.7.1、子串</h5>
+<p>​		String 类的 substring 方法可以从一个较大的字符串提取出一个子串（某一段字符）。如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">String</span> <span class="n">greeting</span> <span class="o">=</span> <span class="s">&#34;Hello&#34;</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">String</span> <span class="n">s</span> <span class="o">=</span> <span class="n">greeting</span><span class="o">.</span><span class="na">substring</span><span class="o">(</span><span class="n">0</span><span class="o">,</span><span class="n">3</span><span class="o">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>创建一个由字符&quot;Hel&quot;组成的字符串。</li>
+<li>在 substring 中从 0 开始计算，直到 3 为止，但不包括3。</li>
+</ul>
+<blockquote>
+<p>substring(开始位置，结束位置);</p>
+</blockquote>
+<h5 id="172拼接">1.7.2、拼接</h5>
+<p>​		与绝大多数程序设计语言一样，java 语言 允许使用 + 号拼接两个字符串。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">age</span> <span class="o">=</span> <span class="n">18</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">name</span> <span class="o">=</span> <span class="s">&#34;zhangsan&#34;</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">name</span><span class="o">+</span><span class="n">age</span><span class="o">);</span>	<span class="c1">//输出：zhangsan18
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h5 id="173不可变字符串">1.7.3、不可变字符串</h5>
+<p>​		String 类没有提供修改字符串中某个字符的方法。如果希望将 greeting 的内容修改为&quot;Help&rdquo;，不能直接将 greeting 的最后两个位置的字符修改为  &rsquo; p &rsquo; 和  &rsquo; ! &lsquo;。
+​		在 java 中实现这项操作可以提取想要保留的子串，再与希望替换的字符拼接：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">greeting</span> <span class="o">=</span> <span class="n">greeting</span><span class="o">(</span><span class="n">0</span><span class="o">.</span><span class="na">3</span><span class="o">)</span> <span class="o">+</span> <span class="s">&#34;p!&#34;</span><span class="o">;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>上面这条语句将 greeting 变量的当前值修改为 &ldquo;Help!&quot;。</p>
+</blockquote>
+<h5 id="174检测字符串是否相等">1.7.4、检测字符串是否相等</h5>
+<blockquote>
+<p>可以使用 equals 方法检测两个字符串是否相等。如：</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">x</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="n">y</span><span class="o">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>​		如果字符串 x 与字符串 y 相等，则返回 true ；否则，返回 false。需要注意，x 与 y 可以是字符串变量，也可以是字符串字面量。如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="s">&#34;Hello&#34;</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="n">greeting</span><span class="o">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>想要检测两个字符串是否相等，而不区分大小写，可以使用 equalsIgnoreCase 方法。</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="s">&#34;Hello&#34;</span><span class="o">.</span><span class="na">equalsIgnoreCase</span><span class="o">(</span><span class="s">&#34;hello&#34;</span><span class="o">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>equals 和 == 的区别</p>
+</blockquote>
+<blockquote>
+<p>对于==：</p>
+<p>作用于基本数据类型的变量，则直接比较其存储的 ”值“ 是否相等。</p>
+<p>作用于引用类型的变量，则比较的是所指向的对象的地址。</p>
+<p>对于 equals：</p>
+<p>equals 方法不能作用于基本数据类型的变量。</p>
+<p>如果没用对 Object 中 equals 方法进行重写，则比较的是引用类型的变量所指向的对象的地址，反之则比较的是内容</p>
+</blockquote>
+<blockquote>
+<p>注意：String 这个类已经对 equals 方法进行了重写，比较的是字符串的内容。</p>
+</blockquote>
+<h5 id="175空串与-null-串">1.7.5、空串与 Null 串</h5>
+<p>​		空串 &quot;&rdquo; 是长度为0的字符串。可以用以下代码检查一个字符串是否为空：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="k">if</span><span class="o">(</span><span class="n">str</span><span class="o">.</span><span class="na">length</span><span class="o">()</span> <span class="o">==</span> <span class="n">0</span><span class="o">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>或</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="k">if</span><span class="o">(</span><span class="n">str</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="s">&#34;&#34;</span><span class="o">))</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>​		空串是一个 java 对象，有自己的串长度（0）和内容（空）。不过，String 变量还可以存放一个特殊的值，名为 null，表示目前没有任何对象与该变量关联。</p>
+<p>​		检查一个字符串是否为 null，如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="k">if</span><span class="o">(</span><span class="n">str</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>有时要检查一个字符串既不是 null 也不是空串，如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="k">if</span><span class="o">(</span><span class="n">str</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="n">str</span><span class="o">.</span><span class="na">length</span><span class="o">()</span> <span class="o">!=</span> <span class="n">0</span><span class="o">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h5 id="176码点与代码单元">1.7.6、码点与代码单元</h5>
+<p>​		java 字符串由 char 值序列组成。char 数据类型是一个采用 UTF -16 编码表示 Unicode 码点的代码单元。</p>
+<blockquote>
+<p>length 方法将返回采用 UTF-16 编码表示给定字符串所需要的代码单元数量。如：</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">String</span> <span class="n">greeting</span> <span class="o">=</span> <span class="s">&#34;Hello&#34;</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">greeting</span><span class="o">.</span><span class="na">length</span><span class="o">();</span>	<span class="c1">//返回 5
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>想要得到实际的长度，即码点数量，可以调用：</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">cpCount</span> <span class="o">=</span> <span class="n">greeting</span><span class="o">.</span><span class="na">codePointCount</span><span class="o">(</span><span class="n">0</span><span class="o">,</span><span class="n">greeting</span><span class="o">.</span><span class="na">length</span><span class="o">());</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>调用 s.charAt(n) 将返回位置 n 的代码单元，n 介于 0 ~ s.length()-1之间。如：</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kt">char</span> <span class="n">first</span> <span class="o">=</span> <span class="n">greeting</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="n">0</span><span class="o">);</span><span class="c1">//返回 H
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">char</span> <span class="n">last</span> <span class="o">=</span> <span class="n">greeting</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="n">4</span><span class="o">);</span> <span class="c1">//返回 o
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>要想得到第 i 个码点，如：</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">index</span> <span class="o">=</span> <span class="n">greeting</span><span class="o">.</span><span class="na">offsetByCodePoints</span><span class="o">(</span><span class="n">0</span><span class="o">,</span><span class="n">1</span><span class="o">);</span><span class="c1">//位置
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">int</span> <span class="n">cp</span> <span class="o">=</span> <span class="n">greeting</span><span class="o">.</span><span class="na">codePointAt</span><span class="o">(</span><span class="n">index</span><span class="o">);</span>	<span class="c1">//转ASCII值
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h5 id="177string-api">1.7.7、String API</h5>
+<p>​		java 中的 String 类包含了 50 多个方法。它们绝大多数都很有用，想了解 java 的类或方法就需要学会阅读 官方的 API 文档里面用对一些类或方法的详细讲解。</p>
+<h5 id="178构建字符串">1.7.8、构建字符串</h5>
+<p>​		有些时候，需要由较短的字符串构建字符串，如果采用字符串拼接的方式来达到这个目的，效率会比较低。每次拼接字符串时，都会构建一个新的String 对象，即耗时，又浪费空间。使用 StringBuilder 类就可以避免这个问题的发生。</p>
+<blockquote>
+<p>首先，构建一个空的字符串构建器：</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">StringBuilder</span> <span class="n">builder</span> <span class="o">=</span> <span class="k">new</span> <span class="n">StringBuilder</span><span class="o">();</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>当每次需要添加一部分内容时，就调用 append 方法。</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">builder</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="n">ch</span><span class="o">);</span> <span class="c1">//加一个字符串
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">builder</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="n">str</span><span class="o">);</span><span class="c1">//再加一个字符串，结果应该是 chstr
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>在字符串构建完成时就调用 toString 方法，将可以得到一个 String 对象，其中包含了构建器中的字符串序列。</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">String</span> <span class="n">completedString</span> <span class="o">=</span> <span class="n">buider</span><span class="o">.</span><span class="na">toStrine</span><span class="o">();</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>输出之后就是你 buider 里面的内容。</p>
+</blockquote>
+<blockquote>
+<p>StringBuilder 跟 StringBuffer 的 API 是一样的。</p>
+</blockquote>
+<p>下面一些 StringBuilder 类中的重要方法。</p>
+<blockquote>
+<p>java.lang.StringBuilder</p>
+</blockquote>
+<ul>
+<li>StringBuilder()</li>
+</ul>
+<blockquote>
+<p>构造一个空字符串构建器。</p>
+</blockquote>
+<ul>
+<li>int length()</li>
+</ul>
+<blockquote>
+<p>返回构建器或缓冲器中的代码单元数量。</p>
+</blockquote>
+<ul>
+<li>StringBuilder append(String str)</li>
+</ul>
+<blockquote>
+<p>追加一个字符串并返回 this（当前对象）</p>
+</blockquote>
+<ul>
+<li>StringBuilder append(char c)</li>
+</ul>
+<blockquote>
+<p>追加一个代码单元并返回 this（当前对象）</p>
+</blockquote>
+<ul>
+<li>StringBuilder appendCodePoint(int cp)</li>
+</ul>
+<blockquote>
+<p>追加一个码点，并将其转换为一个或两个代码单元并返回 this（当前对象）</p>
+</blockquote>
+<ul>
+<li>void setCharAt(int i,char c)</li>
+</ul>
+<blockquote>
+<p>将第 i 个代码单元设置为 c</p>
+</blockquote>
+<ul>
+<li>StringBuilder insert(int offset , String str)</li>
+</ul>
+<blockquote>
+<p>在 offset 位置插入一个字符串并返回 this（当前对象）</p>
+</blockquote>
+<ul>
+<li>StringBuilder insert(int offset , char c)</li>
+</ul>
+<blockquote>
+<p>在 offset 位置插入一个代码单元并返回 this（当前对象）</p>
+</blockquote>
+<ul>
+<li>StringBuilder delete(int starIndex , int endIndex)</li>
+</ul>
+<blockquote>
+<p>删除偏移从 startIndex 到 endIndex - 1 的代码单元并返回 this（当前对象）</p>
+</blockquote>
+<ul>
+<li>String toString();</li>
+</ul>
+<blockquote>
+<p>返回一个与构建器或缓冲器内容相同的字符串</p>
+</blockquote>
+<h4 id="18输入与输出">1.8、输入与输出</h4>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/%E7%AC%94%E8%AE%B0/">笔记</a>
+        
+            <a href="/tags/java/">Java</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+</article>
+
+    
+
+    
+
+<aside class="related-contents--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-contents">
+        <div class="flex article-list--tile">
+            
+                
+<article class="has-image">
+    <a href="/posts/servlet%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/">
+        
+        
+            <div class="article-image">
+                <img src="/posts/servlet%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/psc.ade00069454939bd53811193bb1878a6_hu5ffe253b97ed6f565f5b38cfa747edd3_1051075_250x150_fill_box_smart1_3.png" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post Servlet的生命周期"
+                        
+                        data-hash="md5-reAAaUVJOb1TgRGTuxh4pg==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Servlet的生命周期</h2>
+        </div>
+    </a>
+</article>
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    <div class="disqus-container">
+    <div id="disqus_thread"></div>
+<script type="application/javascript">
+    window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "hugo-theme-stack" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+
+<style>
+    .disqus-container {
+        background-color: var(--card-background);
+        border-radius: var(--card-border-radius);
+        box-shadow: var(--shadow-l1);
+        padding: var(--card-padding);
+    }
+</style>
+
+<script>
+    window.addEventListener('onColorSchemeChange', (e) => {
+        if (DISQUS) {
+            DISQUS.reset({
+                reload: true
+            });
+        }
+    })
+</script>
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2020 - 
+        
+        2022 kitty_Happy
+    </section>
+    
+    <section class="powerby">
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.11.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css"integrity="sha256-c0uckgykQ9v5k&#43;IqViZOZKc47Jn7KQil4/MP3ySA3F8="crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css"integrity="sha256-SBLU4vv6CA6lHsZ1XyTdhyjJxCjPif/TRkjnsyGAGnE="crossorigin="anonymous"
+            >
+
+            </main>
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#1java的基础程序设计结构">1、java的基础程序设计结构</a>
+      <ol>
+        <li>
+          <ol>
+            <li><a href="#11一个简单的-java-应用程序">1.1、一个简单的 java 应用程序</a></li>
+            <li><a href="#12java命名规范">1.2、java命名规范</a></li>
+            <li><a href="#13注释">1.3、注释</a></li>
+            <li><a href="#14数据类型">1.4、数据类型</a></li>
+            <li><a href="#15变量与常量">1.5、变量与常量</a></li>
+            <li><a href="#16运算符">1.6、运算符</a></li>
+            <li><a href="#17字符串">1.7、字符串</a></li>
+            <li><a href="#18输入与输出">1.8、输入与输出</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.5/dist/vibrant.min.js"integrity="sha256-5NovOZc4iwiAWTYIFiIM7DxKUXKWvpVEuMEPLzcm5/g="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

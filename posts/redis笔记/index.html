@@ -1,0 +1,1012 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='Redis 基础'><title>Redis学习笔记</title>
+
+<link rel='canonical' href='https://example.com/posts/redis%E7%AC%94%E8%AE%B0/'>
+
+<link rel="stylesheet" href="/scss/style.min.d9e0562edde3d2bdf9d3d81365095a29d062ddaaa5d671f22168e57dfdb18b4f.css"><meta property='og:title' content='Redis学习笔记'>
+<meta property='og:description' content='Redis 基础'>
+<meta property='og:url' content='https://example.com/posts/redis%E7%AC%94%E8%AE%B0/'>
+<meta property='og:site_name' content='kitty_Happy'>
+<meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:tag' content='数据库' /><meta property='article:tag' content='Sql' /><meta property='article:published_time' content='2022-04-28T10:27:00&#43;02:00'/><meta property='article:modified_time' content='2022-04-28T10:27:00&#43;02:00'/><meta property='og:image' content='https://example.com/posts/redis%E7%AC%94%E8%AE%B0/Redis%E7%AC%94%E8%AE%B0%E5%B0%81%E9%9D%A2.jpg' />
+<meta name="twitter:title" content="Redis学习笔记">
+<meta name="twitter:description" content="Redis 基础"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://example.com/posts/redis%E7%AC%94%E8%AE%B0/Redis%E7%AC%94%E8%AE%B0%E5%B0%81%E9%9D%A2.jpg' />
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/%E6%88%91%E7%9A%84%E7%8C%AB%E5%92%AA%E5%A4%B4%E5%83%8F_hu9148bc9c2f1f5191762316808b783c97_20775_300x0_resize_q75_box.jpg" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🧀</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">kitty_Happy</a></h1>
+            <h2 class="site-description">欢迎访问kitty_Happy 的博客,一起开始学习吧！</h2>
+        </div>
+    </header><ol class="social-menu">
+            
+                <li>
+                    <a 
+                        href='https://github.com/CaiJimmy/hugo-theme-stack'
+                        target="_blank"
+                        title="GitHub"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://twitter.com'
+                        target="_blank"
+                        title="Twitter"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-twitter" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M22 4.01c-1 .49 -1.98 .689 -3 .99c-1.121 -1.265 -2.783 -1.335 -4.38 -.737s-2.643 2.06 -2.62 3.737v1c-3.245 .083 -6.135 -1.395 -8 -4c0 0 -4.182 7.433 4 11c-1.872 1.247 -3.739 2.088 -6 2c3.308 1.803 6.913 2.423 10.034 1.517c3.58 -1.04 6.522 -3.723 7.651 -7.742a13.84 13.84 0 0 0 .497 -3.753c-.002 -.249 1.51 -2.772 1.818 -4.013z" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+
+        <div class="menu-bottom-section">
+            
+            
+                <li id="dark-mode-toggle">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <span>暗色模式</span>
+                </li>
+            
+        </div>
+    </ol>
+</aside>
+<main class="main full-width">
+    <article class="has-image main-article">
+    <header class="article-header">
+        <div class="article-image">
+            <a href="/posts/redis%E7%AC%94%E8%AE%B0/">
+                <img src="/posts/redis%E7%AC%94%E8%AE%B0/Redis%E7%AC%94%E8%AE%B0%E5%B0%81%E9%9D%A2_hu667a4f12021b9fa2b935caca2429e362_648718_800x0_resize_q75_box.jpg"
+                        srcset="/posts/redis%E7%AC%94%E8%AE%B0/Redis%E7%AC%94%E8%AE%B0%E5%B0%81%E9%9D%A2_hu667a4f12021b9fa2b935caca2429e362_648718_800x0_resize_q75_box.jpg 800w, /posts/redis%E7%AC%94%E8%AE%B0/Redis%E7%AC%94%E8%AE%B0%E5%B0%81%E9%9D%A2_hu667a4f12021b9fa2b935caca2429e362_648718_1600x0_resize_q75_box.jpg 1600w"
+                        width="800" 
+                        height="405" 
+                        loading="lazy"
+                        alt="Featured image of post Redis学习笔记" />
+                
+            </a>
+        </div>
+    
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/redis/" >
+                Redis
+            </a>
+        
+            <a href="/categories/nosql%E6%95%B0%E6%8D%AE%E5%BA%93/" >
+                nosql数据库
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/posts/redis%E7%AC%94%E8%AE%B0/">Redis学习笔记</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            Redis 基础
+        </h3>
+        
+    </div>
+
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Apr 28, 2022</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    阅读时长: 2 分钟
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+</header>
+
+    <section class="article-content">
+    
+    
+    <p>Redis学习笔记
+[toc]</p>
+<h3 id="1什么是redis">1、什么是Redis</h3>
+<p><strong>百度百科：</strong></p>
+<blockquote>
+<p>Redis（Remote Dictionary Server )，即远程字典服务，是一个开源的使用ANSI C语言编写、支持网络、可基于内存亦可持久化的日志型、Key-Value数据库，并提供多种语言的API。从2010年3月15日起，Redis的开发工作由VMware主持。从2013年5月开始，Redis的开发由Pivotal赞助。</p>
+</blockquote>
+<p><strong>概念：</strong></p>
+<blockquote>
+<p>redis是一款高性能的NOSQL系列的非关系性数据库</p>
+</blockquote>
+<h4 id="11什么是nosql">1.1、什么是NOSQL</h4>
+<blockquote>
+<p>NoSQL，泛指非关系型的数据库。随着互联网web2.0网站的兴起，传统的关系数据库在处理web2.0网站，特别是超大规模和高并发的SNS类型的web2.0纯动态网站已经显得力不从心，出现了很多难以克服的问题，而非关系型的数据库则由于其本身的特点得到了非常迅速的发展。NoSQL数据库的产生就是为了解决大规模数据集合多重数据种类带来的挑战，特别是大数据应用难题。</p>
+</blockquote>
+<h5 id="111nosql和关系型数据库比较">1.1.1、NOSQL和关系型数据库比较</h5>
+<p><strong>优点：</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">（1）、成本：nosql数据库简易部署，基本都是开源软件，不需要像使用oracle那样花费大量成本购买使用，相比关系型数据库价格便宜。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">（2）、查询速度：nosql数据库将数据存储于缓存之中，关系型数据库将数据存储在硬盘中，自然查询速度远不及nosql数据库。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">（3）存储数据的格式：nosql的存储格式是key,value形式、文档形式、图片形式等等，所以可以存储基础类型以及对象或者是集合等各种格式，而数据库则只支持基础类型。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">（4）扩展性：关系型数据库有类似join这样的多表查询机制的限制导致扩展很艰难。
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>缺点：</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">（1）维护的工具和资料有限，因为nosql是属于新的技术，不能和关系型数据库10几年的技术同日而语。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">（2）不提供对sql的支持，如果不支持sql这样的工业标准，将产生一定用户的学习和使用成本。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">（3）不提供关系型数据库对事务的处理。
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h5 id="112非关系型数据库的优势">1.1.2.	非关系型数据库的优势：</h5>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">（1）性能NOSQL是基于键值对的，可以想象成表中的主键和值的对应关系，而且不需要经过SQL层的解析，所以性能非常高。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">（2）可扩展性同样也是因为基于键值对，数据之间没有耦合性，所以非常容易水平扩展。
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h5 id="113关系型数据库的优势">1.1.3.	关系型数据库的优势：</h5>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">（1）复杂查询可以用SQL语句方便的在一个表以及多个表之间做非常复杂的数据查询。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">（2）事务支持使得对于安全性能很高的数据访问要求得以实现。对于这两类数据库，对方的优势就是自己的弱势，反之亦然。		
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h5 id="114总结">1.1.4.	总结</h5>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">	关系型数据库与NoSQL数据库并非对立而是互补的关系，即通常情况下使用关系型数据库，在适合使用NoSQL的时候使用NoSQL数据库，让NoSQL数据库对关系型数据库的不足进行弥补。
+</span></span><span class="line"><span class="cl">	一般会将数据存储在关系型数据库中，在nosql数据库中备份存储关系型数据库的数据
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="12主流的nosql产品">1.2.主流的NOSQL产品</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">* 键值(Key-Value)存储数据库
+</span></span><span class="line"><span class="cl">		相关产品： Tokyo Cabinet/Tyrant、Redis、Voldemort、Berkeley DB
+</span></span><span class="line"><span class="cl">		典型应用： 内容缓存，主要用于处理大量数据的高访问负载。 
+</span></span><span class="line"><span class="cl">		数据模型： 一系列键值对
+</span></span><span class="line"><span class="cl">		优势： 快速查询
+</span></span><span class="line"><span class="cl">		劣势： 存储的数据缺少结构化
+</span></span><span class="line"><span class="cl">* 列存储数据库
+</span></span><span class="line"><span class="cl">		相关产品：Cassandra, HBase, Riak
+</span></span><span class="line"><span class="cl">		典型应用：分布式的文件系统
+</span></span><span class="line"><span class="cl">		数据模型：以列簇式存储，将同一列数据存在一起
+</span></span><span class="line"><span class="cl">		优势：查找速度快，可扩展性强，更容易进行分布式扩展
+</span></span><span class="line"><span class="cl">		劣势：功能相对局限
+</span></span><span class="line"><span class="cl">* 文档型数据库
+</span></span><span class="line"><span class="cl">		相关产品：CouchDB、MongoDB
+</span></span><span class="line"><span class="cl">		典型应用：Web应用（与Key-Value类似，Value是结构化的）
+</span></span><span class="line"><span class="cl">		数据模型： 一系列键值对
+</span></span><span class="line"><span class="cl">		优势：数据结构要求不严格
+</span></span><span class="line"><span class="cl">		劣势： 查询性能不高，而且缺乏统一的查询语法
+</span></span><span class="line"><span class="cl">* 图形(Graph)数据库
+</span></span><span class="line"><span class="cl">		相关数据库：Neo4J、InfoGrid、Infinite Graph
+</span></span><span class="line"><span class="cl">		典型应用：社交网络
+</span></span><span class="line"><span class="cl">		数据模型：图结构
+</span></span><span class="line"><span class="cl">		优势：利用图结构相关算法。
+</span></span><span class="line"><span class="cl">		劣势：需要对整个图做计算才能得出结果，不容易做分布式的集群方案。
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="2redis的下载与安装">2、Redis的下载与安装</h3>
+<ol>
+<li>官网：https://redis.io</li>
+<li>中文网：http://www.redis.net.cn/</li>
+<li>解压直接可以使用：
+<ul>
+<li>redis.windows.conf：配置文件</li>
+<li>redis-cli.exe：redis的客户端</li>
+<li>redis-server.exe：redis服务器端</li>
+</ul>
+</li>
+</ol>
+<h4 id="21redis的打开">2.1、Redis的打开</h4>
+<p><strong>Redis的文件结构如下：</strong></p>
+<blockquote>
+<p><img src="https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/1010/Redis%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="Redis文件结构"
+	
+	
+></p>
+</blockquote>
+<blockquote>
+<p>点击上面路径框输入 cmd 输入指令打开 redis 的服务端</p>
+<p><img src="https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/1010/redis%E8%B7%AF%E5%BE%84%E6%A1%86.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="redis路径框"
+	
+	
+></p>
+</blockquote>
+<p><strong>打开redis服务端：</strong></p>
+<blockquote>
+<p>redis-server redis.windows.conf</p>
+</blockquote>
+<p><img src="https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/1010/%E6%89%93%E5%BC%80redis%E6%9C%8D%E5%8A%A1%E7%AB%AF.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="打开redis服务端"
+	
+	
+></p>
+<p><strong>打开redis客户端：</strong></p>
+<p><img src="https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/1010/%E6%89%93%E5%BC%80%E5%AE%A2%E6%88%B7%E7%AB%AF.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="打开客户端"
+	
+	
+>之后就可以在客户端使用redis了：</p>
+<p><img src="https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/1010/redis%E4%BD%BF%E7%94%A8.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="redis使用"
+	
+	
+></p>
+<h3 id="3redis的应用场景">3、redis的应用场景</h3>
+<p>​		•	缓存（数据查询、短连接、新闻内容、商品内容等等）
+​		•	聊天室的在线好友列表
+​		•	任务队列。（秒杀、抢购、12306等等）
+​		•	应用排行榜
+​		•	网站访问统计
+​		•	数据过期处理（可以精确到毫秒
+​		•	分布式集群架构中的session分离</p>
+<h3 id="4redis的使用">4、redis的使用</h3>
+<h4 id="41redis的数据结构">4.1、redis的数据结构</h4>
+<blockquote>
+<p>redis存储的是：key,value格式的数据，其中key都是字符串，value有5种不同的数据结构</p>
+</blockquote>
+<p><strong>value的数据结构：</strong>
+(1) 字符串类型 string
+(2) 哈希类型 hash ： map格式<br>
+(3) 列表类型 list ： linkedlist格式。支持重复元素
+(4) 集合类型 set  ： 不允许重复元素
+(5) 有序集合类型 sortedset：不允许重复元素，且元素有顺序</p>
+<h5 id="411字符串类型-string">4.1.1、字符串类型 string</h5>
+<p><strong>储存：</strong></p>
+<blockquote>
+<p><strong>set</strong> key value</p>
+</blockquote>
+<p><strong>获取：</strong></p>
+<blockquote>
+<p><strong>get</strong> key</p>
+</blockquote>
+<p><strong>删除：</strong></p>
+<blockquote>
+<p><strong>del</strong> key</p>
+</blockquote>
+<h5 id="412哈希类型-hash">4.1.2、哈希类型 hash</h5>
+<p><strong>储存：</strong></p>
+<blockquote>
+<p><strong>hset</strong> key field value</p>
+</blockquote>
+<p><strong>获取：</strong></p>
+<blockquote>
+<p><strong>hget</strong> key field**: 获取指定的field对应的值**</p>
+</blockquote>
+<blockquote>
+<p><strong>hgetall</strong> key**：获取所有的field和value**</p>
+</blockquote>
+<p><strong>删除：</strong></p>
+<blockquote>
+<p><strong>hdel</strong> key field</p>
+</blockquote>
+<h5 id="413列表类型-list">4.1.3、列表类型 list</h5>
+<p><strong>列表：</strong></p>
+<blockquote>
+<p>可以添加一个元素到列表的头部（左边）或者尾部（右边）</p>
+</blockquote>
+<p><strong>往左添加：</strong></p>
+<blockquote>
+<p><strong>lpush</strong> key value</p>
+</blockquote>
+<p><strong>往右添加：</strong></p>
+<blockquote>
+<p><strong>rpush</strong> key value</p>
+</blockquote>
+<p>先进先出
+<strong>获取：</strong></p>
+<blockquote>
+<p><strong>lrange</strong> key start end <strong>：范围获取</strong>
+例如：lrange （key） 0 -1 表示获取全部</p>
+</blockquote>
+<p><strong>删除：</strong></p>
+<blockquote>
+<p><strong>lpop</strong> key**：删除列表最左边的元素，并将元素返回**</p>
+</blockquote>
+<blockquote>
+<p><strong>rpop</strong> key**： 删除列表最右边的元素，并将元素返回**</p>
+</blockquote>
+<h5 id="414集合类型-set">4.1.4、集合类型 set</h5>
+<p><strong>特征：</strong></p>
+<blockquote>
+<p>不允许重复元素</p>
+</blockquote>
+<p><strong>存储：</strong></p>
+<blockquote>
+<p><strong>sadd</strong> key value</p>
+</blockquote>
+<p><strong>获取</strong></p>
+<blockquote>
+<p><strong>smembers</strong> key**：获取set集合中所有元素**</p>
+</blockquote>
+<p><strong>删除：</strong></p>
+<blockquote>
+<p><strong>srem</strong> key value**：删除set集合中的某个元素**</p>
+</blockquote>
+<h5 id="415有序集合类型-sortedset">4.1.5、有序集合类型 sortedset</h5>
+<p><strong>特征：</strong></p>
+<blockquote>
+<p>不允许重复元素，且元素有顺序.每个元素都会关联一个double类型的分数。redis正是通过分数来为集合中的成员进行从小到大的排序。</p>
+</blockquote>
+<p><strong>存储：</strong></p>
+<blockquote>
+<p><strong>zadd</strong> key score value</p>
+</blockquote>
+<p><strong>score</strong> 表示分数 redis 按照分数进行排序</p>
+<p><strong>获取</strong></p>
+<blockquote>
+<p><strong>zrange</strong> key start end [withscores]</p>
+</blockquote>
+<blockquote>
+<p>例如：zrange （key） 0 -1 表示获取全部 value
+或：zrange （key） 0 -1 withscores 表示获取全部 value 及分数</p>
+</blockquote>
+<p><strong>删除：</strong></p>
+<blockquote>
+<p><strong>zrem</strong> key value</p>
+</blockquote>
+<h5 id="416通用命令">4.1.6、通用命令</h5>
+<ol>
+<li><strong>keys</strong> * ：查询所有的键</li>
+<li><strong>type</strong> key ：获取键（key）对应的value类型</li>
+<li><strong>del</strong> key ：删除指定的key value</li>
+<li><strong>flushall</strong> ：删除所有</li>
+</ol>
+<h4 id="42持久化">4.2、持久化</h4>
+<blockquote>
+<p>redis是一个内存数据库，当redis服务器重启，或者电脑重启，数据会丢失，我们可以将redis内存中的数据持久化保存到硬盘的文件中。</p>
+</blockquote>
+<p><strong>持久化机制：</strong></p>
+<blockquote>
+<p>redis 有两种持久化方式</p>
+</blockquote>
+<ol>
+<li>ROB</li>
+<li>AOF</li>
+</ol>
+<h5 id="421rob">4.2.1、ROB</h5>
+<blockquote>
+<p>默认方式，不需要进行配置，默认就使用这种机制</p>
+</blockquote>
+<ol>
+<li>在一定的间隔时间中，检测key的变化情况，然后持久化数据
+<strong>修改配置文件：</strong></li>
+</ol>
+<blockquote>
+<p>可以通过编辑 redis.windwos.conf 文件里面的 save 参数，得到自己想要 redis 的保存的时间</p>
+</blockquote>
+<p><img src="https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/1010/ROB%E6%96%B9%E5%BC%8F.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="ROB方式"
+	
+	
+></p>
+<blockquote>
+<p>如验证码24h之后失效</p>
+</blockquote>
+<ol start="2">
+<li>之后重启服务器</li>
+</ol>
+<h5 id="422aof">4.2.2、AOF</h5>
+<blockquote>
+<p>日志记录的方式，可以记录每一条命令的操作。可以每一次命令操作后，持久化数据</p>
+</blockquote>
+<ol>
+<li>编辑redis.windwos.conf文件</li>
+</ol>
+<blockquote>
+<p>把 <strong>appendonly no（关闭aof）</strong> 改成 <strong>appendonly yes （开启aof）</strong></p>
+</blockquote>
+<p><img src="https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/1010/AOF%E6%96%B9%E5%BC%8F.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="AOF方式"
+	
+	
+></p>
+<p>默认**appendfsync **everysec 表示每隔一秒进行一次持久化</p>
+<p><strong>appendfsync</strong>  可修改为 ：</p>
+<ul>
+<li>appendfsync always ： 每一次操作都进行持久化</li>
+<li>appendfsync no	 ： 不进行持久化</li>
+</ul>
+<h3 id="5-java客户端-jedis">5. Java客户端 Jedis</h3>
+<ul>
+<li>Jedis: 一款java操作redis数据库的工具.</li>
+<li>使用步骤：
+<ol>
+<li>下载jedis的jar包</li>
+<li>使用
+//1. 获取连接
+Jedis jedis = new Jedis(&ldquo;localhost&rdquo;,6379);
+//2. 操作
+jedis.set(&ldquo;username&rdquo;,&ldquo;zhangsan&rdquo;);
+//3. 关闭连接
+jedis.close();</li>
+</ol>
+</li>
+</ul>
+<p><strong>注意：</strong></p>
+<blockquote>
+<p>Jedis jedis = new Jedis(); 括号里面没有参数的时候默认就是本地地址 127.0.0.1 6379</p>
+</blockquote>
+<blockquote>
+<p>不过多讲解，因为 <strong>Jedis</strong> 里面都有对应的一模一样的方法，并不难理解，多练习，假如以上 set</p>
+</blockquote>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a>
+        
+            <a href="/tags/sql/">Sql</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+</article>
+
+    
+
+    
+
+<aside class="related-contents--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-contents">
+        <div class="flex article-list--tile">
+            
+                
+<article class="has-image">
+    <a href="/posts/mysql-day01%E7%AC%94%E8%AE%B001/">
+        
+        
+            <div class="article-image">
+                <img src="/posts/mysql-day01%E7%AC%94%E8%AE%B001/mysql01%E7%AC%94%E8%AE%B0%E5%B0%81%E9%9D%A2.976bbdb9018cc05d92695728a1c6bc00_hu1b772fce74909e5272388430c6e346f6_64134_250x150_fill_q75_box_smart1.jpeg" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post myaql bay01学习笔记"
+                        
+                        data-hash="md5-l2u9uQGMwF2SaVcooca8AA==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">myaql bay01学习笔记</h2>
+        </div>
+    </a>
+</article>
+            
+                
+<article class="has-image">
+    <a href="/posts/mysql-day01%E7%AC%94%E8%AE%B004/">
+        
+        
+            <div class="article-image">
+                <img src="/posts/mysql-day01%E7%AC%94%E8%AE%B004/mysql04%E7%AC%94%E8%AE%B0%E5%B0%81%E9%9D%A2.48e03ebe32236c825039087bffb52000_hu3fc71e4c8e08c2b9f564ebeadadf581e_746685_250x150_fill_q75_box_smart1.jpeg" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post myaql bay04学习笔记"
+                        
+                        data-hash="md5-SOA&#43;vjIjbIJQOQh7/7UgAA==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">myaql bay04学习笔记</h2>
+        </div>
+    </a>
+</article>
+            
+                
+<article class="has-image">
+    <a href="/posts/mysql-day01%E7%AC%94%E8%AE%B002/">
+        
+        
+            <div class="article-image">
+                <img src="/posts/mysql-day01%E7%AC%94%E8%AE%B002/mysql02%E7%AC%94%E8%AE%B0%E5%B0%81%E9%9D%A2.b36f2423a286d474d12e344e175035e5_hud9c3e26d3b8a409d26d11b0a341cec7d_79875_250x150_fill_q75_box_smart1.jpeg" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post myaql bay02学习笔记"
+                        
+                        data-hash="md5-s28kI6KG1HTRLjROF1A15Q==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">myaql bay02学习笔记</h2>
+        </div>
+    </a>
+</article>
+            
+                
+<article class="has-image">
+    <a href="/posts/mysql-day01%E7%AC%94%E8%AE%B003/">
+        
+        
+            <div class="article-image">
+                <img src="/posts/mysql-day01%E7%AC%94%E8%AE%B003/mysql03%E7%AC%94%E8%AE%B0%E5%B0%81%E9%9D%A2.2e9c4114458a2db7432e9bf9a03b43a8_hu7573ae13fd1debb8cdc8431c54ec1cb8_473420_250x150_fill_box_smart1_3.png" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post myaql bay03学习笔记"
+                        
+                        data-hash="md5-LpxBFEWKLbdDLpv5oDtDqA==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">myaql bay03学习笔记</h2>
+        </div>
+    </a>
+</article>
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    <div class="disqus-container">
+    <div id="disqus_thread"></div>
+<script type="application/javascript">
+    window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "hugo-theme-stack" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+
+<style>
+    .disqus-container {
+        background-color: var(--card-background);
+        border-radius: var(--card-border-radius);
+        box-shadow: var(--shadow-l1);
+        padding: var(--card-padding);
+    }
+</style>
+
+<script>
+    window.addEventListener('onColorSchemeChange', (e) => {
+        if (DISQUS) {
+            DISQUS.reset({
+                reload: true
+            });
+        }
+    })
+</script>
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2020 - 
+        
+        2022 kitty_Happy
+    </section>
+    
+    <section class="powerby">
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.11.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css"integrity="sha256-c0uckgykQ9v5k&#43;IqViZOZKc47Jn7KQil4/MP3ySA3F8="crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css"integrity="sha256-SBLU4vv6CA6lHsZ1XyTdhyjJxCjPif/TRkjnsyGAGnE="crossorigin="anonymous"
+            >
+
+            </main>
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li>
+      <ol>
+        <li><a href="#1什么是redis">1、什么是Redis</a>
+          <ol>
+            <li><a href="#11什么是nosql">1.1、什么是NOSQL</a></li>
+            <li><a href="#12主流的nosql产品">1.2.主流的NOSQL产品</a></li>
+          </ol>
+        </li>
+        <li><a href="#2redis的下载与安装">2、Redis的下载与安装</a>
+          <ol>
+            <li><a href="#21redis的打开">2.1、Redis的打开</a></li>
+          </ol>
+        </li>
+        <li><a href="#3redis的应用场景">3、redis的应用场景</a></li>
+        <li><a href="#4redis的使用">4、redis的使用</a>
+          <ol>
+            <li><a href="#41redis的数据结构">4.1、redis的数据结构</a></li>
+            <li><a href="#42持久化">4.2、持久化</a></li>
+          </ol>
+        </li>
+        <li><a href="#5-java客户端-jedis">5. Java客户端 Jedis</a></li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.5/dist/vibrant.min.js"integrity="sha256-5NovOZc4iwiAWTYIFiIM7DxKUXKWvpVEuMEPLzcm5/g="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

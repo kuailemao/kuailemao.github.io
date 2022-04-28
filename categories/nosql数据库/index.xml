@@ -1,0 +1,447 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>nosql数据库 on kitty_Happy</title>
+        <link>https://example.com/categories/nosql%E6%95%B0%E6%8D%AE%E5%BA%93/</link>
+        <description>Recent content in nosql数据库 on kitty_Happy</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>en-us</language>
+        <lastBuildDate>Thu, 28 Apr 2022 10:27:00 +0200</lastBuildDate><atom:link href="https://example.com/categories/nosql%E6%95%B0%E6%8D%AE%E5%BA%93/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Redis学习笔记</title>
+        <link>https://example.com/posts/redis%E7%AC%94%E8%AE%B0/</link>
+        <pubDate>Thu, 28 Apr 2022 10:27:00 +0200</pubDate>
+        
+        <guid>https://example.com/posts/redis%E7%AC%94%E8%AE%B0/</guid>
+        <description>&lt;img src="https://example.com/posts/redis%E7%AC%94%E8%AE%B0/Redis%E7%AC%94%E8%AE%B0%E5%B0%81%E9%9D%A2.jpg" alt="Featured image of post Redis学习笔记" /&gt;&lt;p&gt;Redis学习笔记
+[toc]&lt;/p&gt;
+&lt;h3 id=&#34;1什么是redis&#34;&gt;1、什么是Redis&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;百度百科：&lt;/strong&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Redis（Remote Dictionary Server )，即远程字典服务，是一个开源的使用ANSI C语言编写、支持网络、可基于内存亦可持久化的日志型、Key-Value数据库，并提供多种语言的API。从2010年3月15日起，Redis的开发工作由VMware主持。从2013年5月开始，Redis的开发由Pivotal赞助。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;概念：&lt;/strong&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;redis是一款高性能的NOSQL系列的非关系性数据库&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h4 id=&#34;11什么是nosql&#34;&gt;1.1、什么是NOSQL&lt;/h4&gt;
+&lt;blockquote&gt;
+&lt;p&gt;NoSQL，泛指非关系型的数据库。随着互联网web2.0网站的兴起，传统的关系数据库在处理web2.0网站，特别是超大规模和高并发的SNS类型的web2.0纯动态网站已经显得力不从心，出现了很多难以克服的问题，而非关系型的数据库则由于其本身的特点得到了非常迅速的发展。NoSQL数据库的产生就是为了解决大规模数据集合多重数据种类带来的挑战，特别是大数据应用难题。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h5 id=&#34;111nosql和关系型数据库比较&#34;&gt;1.1.1、NOSQL和关系型数据库比较&lt;/h5&gt;
+&lt;p&gt;&lt;strong&gt;优点：&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;（1）、成本：nosql数据库简易部署，基本都是开源软件，不需要像使用oracle那样花费大量成本购买使用，相比关系型数据库价格便宜。
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;（2）、查询速度：nosql数据库将数据存储于缓存之中，关系型数据库将数据存储在硬盘中，自然查询速度远不及nosql数据库。
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;（3）存储数据的格式：nosql的存储格式是key,value形式、文档形式、图片形式等等，所以可以存储基础类型以及对象或者是集合等各种格式，而数据库则只支持基础类型。
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;（4）扩展性：关系型数据库有类似join这样的多表查询机制的限制导致扩展很艰难。
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;strong&gt;缺点：&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;（1）维护的工具和资料有限，因为nosql是属于新的技术，不能和关系型数据库10几年的技术同日而语。
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;（2）不提供对sql的支持，如果不支持sql这样的工业标准，将产生一定用户的学习和使用成本。
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;（3）不提供关系型数据库对事务的处理。
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h5 id=&#34;112非关系型数据库的优势&#34;&gt;1.1.2.	非关系型数据库的优势：&lt;/h5&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;（1）性能NOSQL是基于键值对的，可以想象成表中的主键和值的对应关系，而且不需要经过SQL层的解析，所以性能非常高。
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;（2）可扩展性同样也是因为基于键值对，数据之间没有耦合性，所以非常容易水平扩展。
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h5 id=&#34;113关系型数据库的优势&#34;&gt;1.1.3.	关系型数据库的优势：&lt;/h5&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;（1）复杂查询可以用SQL语句方便的在一个表以及多个表之间做非常复杂的数据查询。
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;（2）事务支持使得对于安全性能很高的数据访问要求得以实现。对于这两类数据库，对方的优势就是自己的弱势，反之亦然。		
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h5 id=&#34;114总结&#34;&gt;1.1.4.	总结&lt;/h5&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	关系型数据库与NoSQL数据库并非对立而是互补的关系，即通常情况下使用关系型数据库，在适合使用NoSQL的时候使用NoSQL数据库，让NoSQL数据库对关系型数据库的不足进行弥补。
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	一般会将数据存储在关系型数据库中，在nosql数据库中备份存储关系型数据库的数据
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h4 id=&#34;12主流的nosql产品&#34;&gt;1.2.主流的NOSQL产品&lt;/h4&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;23
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;24
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;* 键值(Key-Value)存储数据库
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;		相关产品： Tokyo Cabinet/Tyrant、Redis、Voldemort、Berkeley DB
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;		典型应用： 内容缓存，主要用于处理大量数据的高访问负载。 
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;		数据模型： 一系列键值对
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;		优势： 快速查询
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;		劣势： 存储的数据缺少结构化
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;* 列存储数据库
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;		相关产品：Cassandra, HBase, Riak
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;		典型应用：分布式的文件系统
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;		数据模型：以列簇式存储，将同一列数据存在一起
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;		优势：查找速度快，可扩展性强，更容易进行分布式扩展
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;		劣势：功能相对局限
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;* 文档型数据库
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;		相关产品：CouchDB、MongoDB
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;		典型应用：Web应用（与Key-Value类似，Value是结构化的）
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;		数据模型： 一系列键值对
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;		优势：数据结构要求不严格
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;		劣势： 查询性能不高，而且缺乏统一的查询语法
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;* 图形(Graph)数据库
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;		相关数据库：Neo4J、InfoGrid、Infinite Graph
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;		典型应用：社交网络
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;		数据模型：图结构
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;		优势：利用图结构相关算法。
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;		劣势：需要对整个图做计算才能得出结果，不容易做分布式的集群方案。
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id=&#34;2redis的下载与安装&#34;&gt;2、Redis的下载与安装&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;官网：https://redis.io&lt;/li&gt;
+&lt;li&gt;中文网：http://www.redis.net.cn/&lt;/li&gt;
+&lt;li&gt;解压直接可以使用：
+&lt;ul&gt;
+&lt;li&gt;redis.windows.conf：配置文件&lt;/li&gt;
+&lt;li&gt;redis-cli.exe：redis的客户端&lt;/li&gt;
+&lt;li&gt;redis-server.exe：redis服务器端&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4 id=&#34;21redis的打开&#34;&gt;2.1、Redis的打开&lt;/h4&gt;
+&lt;p&gt;&lt;strong&gt;Redis的文件结构如下：&lt;/strong&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;img src=&#34;https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/1010/Redis%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Redis文件结构&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;点击上面路径框输入 cmd 输入指令打开 redis 的服务端&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/1010/redis%E8%B7%AF%E5%BE%84%E6%A1%86.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;redis路径框&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;打开redis服务端：&lt;/strong&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;redis-server redis.windows.conf&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;img src=&#34;https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/1010/%E6%89%93%E5%BC%80redis%E6%9C%8D%E5%8A%A1%E7%AB%AF.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;打开redis服务端&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;打开redis客户端：&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/1010/%E6%89%93%E5%BC%80%E5%AE%A2%E6%88%B7%E7%AB%AF.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;打开客户端&#34;
+	
+	
+&gt;之后就可以在客户端使用redis了：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/1010/redis%E4%BD%BF%E7%94%A8.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;redis使用&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;h3 id=&#34;3redis的应用场景&#34;&gt;3、redis的应用场景&lt;/h3&gt;
+&lt;p&gt;​		•	缓存（数据查询、短连接、新闻内容、商品内容等等）
+​		•	聊天室的在线好友列表
+​		•	任务队列。（秒杀、抢购、12306等等）
+​		•	应用排行榜
+​		•	网站访问统计
+​		•	数据过期处理（可以精确到毫秒
+​		•	分布式集群架构中的session分离&lt;/p&gt;
+&lt;h3 id=&#34;4redis的使用&#34;&gt;4、redis的使用&lt;/h3&gt;
+&lt;h4 id=&#34;41redis的数据结构&#34;&gt;4.1、redis的数据结构&lt;/h4&gt;
+&lt;blockquote&gt;
+&lt;p&gt;redis存储的是：key,value格式的数据，其中key都是字符串，value有5种不同的数据结构&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;value的数据结构：&lt;/strong&gt;
+(1) 字符串类型 string
+(2) 哈希类型 hash ： map格式&lt;br&gt;
+(3) 列表类型 list ： linkedlist格式。支持重复元素
+(4) 集合类型 set  ： 不允许重复元素
+(5) 有序集合类型 sortedset：不允许重复元素，且元素有顺序&lt;/p&gt;
+&lt;h5 id=&#34;411字符串类型-string&#34;&gt;4.1.1、字符串类型 string&lt;/h5&gt;
+&lt;p&gt;&lt;strong&gt;储存：&lt;/strong&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;set&lt;/strong&gt; key value&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;获取：&lt;/strong&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;get&lt;/strong&gt; key&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;删除：&lt;/strong&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;del&lt;/strong&gt; key&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h5 id=&#34;412哈希类型-hash&#34;&gt;4.1.2、哈希类型 hash&lt;/h5&gt;
+&lt;p&gt;&lt;strong&gt;储存：&lt;/strong&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;hset&lt;/strong&gt; key field value&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;获取：&lt;/strong&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;hget&lt;/strong&gt; key field**: 获取指定的field对应的值**&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;hgetall&lt;/strong&gt; key**：获取所有的field和value**&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;删除：&lt;/strong&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;hdel&lt;/strong&gt; key field&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h5 id=&#34;413列表类型-list&#34;&gt;4.1.3、列表类型 list&lt;/h5&gt;
+&lt;p&gt;&lt;strong&gt;列表：&lt;/strong&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;可以添加一个元素到列表的头部（左边）或者尾部（右边）&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;往左添加：&lt;/strong&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;lpush&lt;/strong&gt; key value&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;往右添加：&lt;/strong&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;rpush&lt;/strong&gt; key value&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;先进先出
+&lt;strong&gt;获取：&lt;/strong&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;lrange&lt;/strong&gt; key start end &lt;strong&gt;：范围获取&lt;/strong&gt;
+例如：lrange （key） 0 -1 表示获取全部&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;删除：&lt;/strong&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;lpop&lt;/strong&gt; key**：删除列表最左边的元素，并将元素返回**&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;rpop&lt;/strong&gt; key**： 删除列表最右边的元素，并将元素返回**&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h5 id=&#34;414集合类型-set&#34;&gt;4.1.4、集合类型 set&lt;/h5&gt;
+&lt;p&gt;&lt;strong&gt;特征：&lt;/strong&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;不允许重复元素&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;存储：&lt;/strong&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;sadd&lt;/strong&gt; key value&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;获取&lt;/strong&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;smembers&lt;/strong&gt; key**：获取set集合中所有元素**&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;删除：&lt;/strong&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;srem&lt;/strong&gt; key value**：删除set集合中的某个元素**&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h5 id=&#34;415有序集合类型-sortedset&#34;&gt;4.1.5、有序集合类型 sortedset&lt;/h5&gt;
+&lt;p&gt;&lt;strong&gt;特征：&lt;/strong&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;不允许重复元素，且元素有顺序.每个元素都会关联一个double类型的分数。redis正是通过分数来为集合中的成员进行从小到大的排序。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;存储：&lt;/strong&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;zadd&lt;/strong&gt; key score value&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;score&lt;/strong&gt; 表示分数 redis 按照分数进行排序&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;获取&lt;/strong&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;zrange&lt;/strong&gt; key start end [withscores]&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;例如：zrange （key） 0 -1 表示获取全部 value
+或：zrange （key） 0 -1 withscores 表示获取全部 value 及分数&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;删除：&lt;/strong&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;zrem&lt;/strong&gt; key value&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h5 id=&#34;416通用命令&#34;&gt;4.1.6、通用命令&lt;/h5&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;keys&lt;/strong&gt; * ：查询所有的键&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;type&lt;/strong&gt; key ：获取键（key）对应的value类型&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;del&lt;/strong&gt; key ：删除指定的key value&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;flushall&lt;/strong&gt; ：删除所有&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4 id=&#34;42持久化&#34;&gt;4.2、持久化&lt;/h4&gt;
+&lt;blockquote&gt;
+&lt;p&gt;redis是一个内存数据库，当redis服务器重启，或者电脑重启，数据会丢失，我们可以将redis内存中的数据持久化保存到硬盘的文件中。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;持久化机制：&lt;/strong&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;redis 有两种持久化方式&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ol&gt;
+&lt;li&gt;ROB&lt;/li&gt;
+&lt;li&gt;AOF&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h5 id=&#34;421rob&#34;&gt;4.2.1、ROB&lt;/h5&gt;
+&lt;blockquote&gt;
+&lt;p&gt;默认方式，不需要进行配置，默认就使用这种机制&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ol&gt;
+&lt;li&gt;在一定的间隔时间中，检测key的变化情况，然后持久化数据
+&lt;strong&gt;修改配置文件：&lt;/strong&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;blockquote&gt;
+&lt;p&gt;可以通过编辑 redis.windwos.conf 文件里面的 save 参数，得到自己想要 redis 的保存的时间&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;img src=&#34;https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/1010/ROB%E6%96%B9%E5%BC%8F.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;ROB方式&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;如验证码24h之后失效&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;之后重启服务器&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h5 id=&#34;422aof&#34;&gt;4.2.2、AOF&lt;/h5&gt;
+&lt;blockquote&gt;
+&lt;p&gt;日志记录的方式，可以记录每一条命令的操作。可以每一次命令操作后，持久化数据&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ol&gt;
+&lt;li&gt;编辑redis.windwos.conf文件&lt;/li&gt;
+&lt;/ol&gt;
+&lt;blockquote&gt;
+&lt;p&gt;把 &lt;strong&gt;appendonly no（关闭aof）&lt;/strong&gt; 改成 &lt;strong&gt;appendonly yes （开启aof）&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;img src=&#34;https://xingqiu-tuchuang-1256524210.cos.ap-shanghai.myqcloud.com/1010/AOF%E6%96%B9%E5%BC%8F.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;AOF方式&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;默认**appendfsync **everysec 表示每隔一秒进行一次持久化&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;appendfsync&lt;/strong&gt;  可修改为 ：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;appendfsync always ： 每一次操作都进行持久化&lt;/li&gt;
+&lt;li&gt;appendfsync no	 ： 不进行持久化&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;5-java客户端-jedis&#34;&gt;5. Java客户端 Jedis&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Jedis: 一款java操作redis数据库的工具.&lt;/li&gt;
+&lt;li&gt;使用步骤：
+&lt;ol&gt;
+&lt;li&gt;下载jedis的jar包&lt;/li&gt;
+&lt;li&gt;使用
+//1. 获取连接
+Jedis jedis = new Jedis(&amp;ldquo;localhost&amp;rdquo;,6379);
+//2. 操作
+jedis.set(&amp;ldquo;username&amp;rdquo;,&amp;ldquo;zhangsan&amp;rdquo;);
+//3. 关闭连接
+jedis.close();&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;注意：&lt;/strong&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Jedis jedis = new Jedis(); 括号里面没有参数的时候默认就是本地地址 127.0.0.1 6379&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;不过多讲解，因为 &lt;strong&gt;Jedis&lt;/strong&gt; 里面都有对应的一模一样的方法，并不难理解，多练习，假如以上 set&lt;/p&gt;
+&lt;/blockquote&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

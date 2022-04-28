@@ -1,0 +1,1664 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='MySQL 基础'><title>myaql bay02学习笔记</title>
+
+<link rel='canonical' href='https://example.com/posts/mysql-day01%E7%AC%94%E8%AE%B002/'>
+
+<link rel="stylesheet" href="/scss/style.min.d9e0562edde3d2bdf9d3d81365095a29d062ddaaa5d671f22168e57dfdb18b4f.css"><meta property='og:title' content='myaql bay02学习笔记'>
+<meta property='og:description' content='MySQL 基础'>
+<meta property='og:url' content='https://example.com/posts/mysql-day01%E7%AC%94%E8%AE%B002/'>
+<meta property='og:site_name' content='kitty_Happy'>
+<meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:tag' content='数据库' /><meta property='article:tag' content='Sql' /><meta property='article:published_time' content='2022-04-28T10:12:00&#43;02:00'/><meta property='article:modified_time' content='2022-04-28T10:12:00&#43;02:00'/><meta property='og:image' content='https://example.com/posts/mysql-day01%E7%AC%94%E8%AE%B002/mysql02%E7%AC%94%E8%AE%B0%E5%B0%81%E9%9D%A2.jpeg' />
+<meta name="twitter:title" content="myaql bay02学习笔记">
+<meta name="twitter:description" content="MySQL 基础"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://example.com/posts/mysql-day01%E7%AC%94%E8%AE%B002/mysql02%E7%AC%94%E8%AE%B0%E5%B0%81%E9%9D%A2.jpeg' />
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/%E6%88%91%E7%9A%84%E7%8C%AB%E5%92%AA%E5%A4%B4%E5%83%8F_hu9148bc9c2f1f5191762316808b783c97_20775_300x0_resize_q75_box.jpg" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🧀</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">kitty_Happy</a></h1>
+            <h2 class="site-description">欢迎访问kitty_Happy 的博客,一起开始学习吧！</h2>
+        </div>
+    </header><ol class="social-menu">
+            
+                <li>
+                    <a 
+                        href='https://github.com/CaiJimmy/hugo-theme-stack'
+                        target="_blank"
+                        title="GitHub"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://twitter.com'
+                        target="_blank"
+                        title="Twitter"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-twitter" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M22 4.01c-1 .49 -1.98 .689 -3 .99c-1.121 -1.265 -2.783 -1.335 -4.38 -.737s-2.643 2.06 -2.62 3.737v1c-3.245 .083 -6.135 -1.395 -8 -4c0 0 -4.182 7.433 4 11c-1.872 1.247 -3.739 2.088 -6 2c3.308 1.803 6.913 2.423 10.034 1.517c3.58 -1.04 6.522 -3.723 7.651 -7.742a13.84 13.84 0 0 0 .497 -3.753c-.002 -.249 1.51 -2.772 1.818 -4.013z" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+
+        <div class="menu-bottom-section">
+            
+            
+                <li id="dark-mode-toggle">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <span>暗色模式</span>
+                </li>
+            
+        </div>
+    </ol>
+</aside>
+<main class="main full-width">
+    <article class="has-image main-article">
+    <header class="article-header">
+        <div class="article-image">
+            <a href="/posts/mysql-day01%E7%AC%94%E8%AE%B002/">
+                <img src="/posts/mysql-day01%E7%AC%94%E8%AE%B002/mysql02%E7%AC%94%E8%AE%B0%E5%B0%81%E9%9D%A2_hud9c3e26d3b8a409d26d11b0a341cec7d_79875_800x0_resize_q75_box.jpeg"
+                        srcset="/posts/mysql-day01%E7%AC%94%E8%AE%B002/mysql02%E7%AC%94%E8%AE%B0%E5%B0%81%E9%9D%A2_hud9c3e26d3b8a409d26d11b0a341cec7d_79875_800x0_resize_q75_box.jpeg 800w, /posts/mysql-day01%E7%AC%94%E8%AE%B002/mysql02%E7%AC%94%E8%AE%B0%E5%B0%81%E9%9D%A2_hud9c3e26d3b8a409d26d11b0a341cec7d_79875_1600x0_resize_q75_box.jpeg 1600w"
+                        width="800" 
+                        height="800" 
+                        loading="lazy"
+                        alt="Featured image of post myaql bay02学习笔记" />
+                
+            </a>
+        </div>
+    
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/" >
+                数据库
+            </a>
+        
+            <a href="/categories/mysql/" >
+                MySQL
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/posts/mysql-day01%E7%AC%94%E8%AE%B002/">myaql bay02学习笔记</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            MySQL 基础
+        </h3>
+        
+    </div>
+
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Apr 28, 2022</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    阅读时长: 4 分钟
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+</header>
+
+    <section class="article-content">
+    
+    
+    <p>mysql day02笔记</p>
+<p>[toc]</p>
+<h3 id="1把查询结果去除重复记录">1、把查询结果去除重复记录</h3>
+<p>去重需要使用一个关键字：distinct</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-SQL" data-lang="SQL"><span class="line"><span class="cl"><span class="w">	</span><span class="k">select</span><span class="w"> </span><span class="k">distinct</span><span class="w"> </span><span class="p">(</span><span class="err">字段名</span><span class="p">)</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="p">(</span><span class="err">表名</span><span class="p">);</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>注意：</strong></p>
+<blockquote>
+<p>原表数据不会被修改，只是查询结果去重。
+distinct只能出现在所有字段的最前方。</p>
+</blockquote>
+<p>distinct出现在两个字段之前，则表示两个字段联合起来去重。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-SQL" data-lang="SQL"><span class="line"><span class="cl"><span class="w">	</span><span class="k">select</span><span class="w"> </span><span class="k">distinct</span><span class="w"> </span><span class="p">(</span><span class="err">字段</span><span class="mi">1</span><span class="p">),(</span><span class="err">字段</span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="p">(</span><span class="err">表名</span><span class="p">);</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="2连接查询">2、连接查询</h3>
+<h4 id="21什么是连接查询">2.1、什么是连接查询？</h4>
+<blockquote>
+<p>从一张表中单独查询，称为单表查询。
+表1和表2联合起来查询数据，从表1中取员工名字，从表2中取部门名字。
+这种跨表查询，多张表联合起来查询数据，被称为连接查询。</p>
+</blockquote>
+<h4 id="22连接查询的分类">2.2、连接查询的分类</h4>
+<p>根据语法的年代分类：</p>
+<blockquote>
+<p>SQL92：1992年的时候出现的语法
+SQL99：1999年的时候出现的语法</p>
+</blockquote>
+<p>现在用的多数都是SQL99语法</p>
+<p>根据表连接的方式分类：</p>
+<blockquote>
+<p><strong>内连接：</strong>
+等值连接
+非等值连接
+自连接</p>
+</blockquote>
+<blockquote>
+<p><strong>外连接：</strong>
+左外连接（左连接）
+右外连接（右连接）</p>
+</blockquote>
+<p>全连接</p>
+<h4 id="23笛卡尔积现象">2.3、笛卡尔积现象</h4>
+<p>当两张表进行连接查询时，没有任何条件的限制，如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-SQL" data-lang="SQL"><span class="line"><span class="cl"><span class="w">	</span><span class="k">select</span><span class="w"> </span><span class="p">(</span><span class="err">字段</span><span class="mi">1</span><span class="p">),(</span><span class="err">字段</span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="p">(</span><span class="err">表</span><span class="mi">1</span><span class="p">),(</span><span class="err">表</span><span class="mi">2</span><span class="p">);</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>以上查询语句会导致出现&quot;笛卡尔积现象&quot;</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">当两张表进行连接查询，没有任何条件限制的时候，最终查询结果条数，是
+</span></span><span class="line"><span class="cl">两张表条数的乘积，这种现象被称为：笛卡尔积现象。（笛卡尔发现的，这是
+</span></span><span class="line"><span class="cl">一个数学现象。）
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="24避免笛卡尔积现象">2.4、避免笛卡尔积现象</h4>
+<p>连接时加条件，满足这个条件的记录被筛选出来！</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-SQL" data-lang="SQL"><span class="line"><span class="cl"><span class="k">select</span><span class="w"> </span><span class="err">表</span><span class="mi">1</span><span class="p">.(</span><span class="err">字段</span><span class="mi">1</span><span class="p">),</span><span class="err">表</span><span class="mi">2</span><span class="p">.(</span><span class="err">字段</span><span class="mi">2</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">from</span><span class="w"> </span><span class="p">(</span><span class="err">表</span><span class="mi">1</span><span class="p">),(</span><span class="err">表</span><span class="mi">2</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">where</span><span class="w"> </span><span class="err">表</span><span class="mi">1</span><span class="p">.(</span><span class="err">部门表</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="err">表</span><span class="mi">2</span><span class="p">.(</span><span class="err">部门表</span><span class="p">);</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>以上的连接条件是 表1 跟 表2 的部门相同，获取两表同一部门的字段数据，可以避免出现笛卡尔积现象</p>
+<blockquote>
+<p>最终查询的结果条数是正确的条数，但是匹配的过程中，匹配的次数并没有减少，还是跟没有条件
+的比较的次数一样，只不过进行了四选一进行了筛选。匹配次数并没有减少。</p>
+</blockquote>
+<p><strong>注意：</strong></p>
+<blockquote>
+<p>通过笛卡尔积现象得出，表的连接次数越多效率越低，尽量避免表的
+连接次数。</p>
+</blockquote>
+<h4 id="25内连接之等值连接">2.5、内连接之等值连接</h4>
+<p>例：查询某公司的员工名称与部门名称</p>
+<p>SQL92语法：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-SQL" data-lang="SQL"><span class="line"><span class="cl"><span class="w">	</span><span class="k">select</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="n">e</span><span class="p">.(</span><span class="err">员工名称</span><span class="p">),</span><span class="n">d</span><span class="p">.(</span><span class="err">部门名称</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="k">from</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="p">(</span><span class="err">员工所在部门表</span><span class="p">)</span><span class="w"> </span><span class="n">e</span><span class="p">,(</span><span class="err">部门表</span><span class="p">)</span><span class="w"> </span><span class="n">d</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="k">where</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="n">e</span><span class="p">.(</span><span class="err">员工部门</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">d</span><span class="p">.(</span><span class="err">部门</span><span class="p">);</span><span class="w"> </span><span class="o">//</span><span class="w"> </span><span class="err">条件是等量关系，所以被称为等值连接。</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>注意：取别名很重要，增加效率
+<strong>sql92的缺点：</strong></p>
+<blockquote>
+<p>结构不清晰，表的连接条件，和后期进一步筛选的条件，都放到了where后面。</p>
+</blockquote>
+<p>SQL99语法：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-SQL" data-lang="SQL"><span class="line"><span class="cl"><span class="w">	</span><span class="k">select</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="n">e</span><span class="p">.(</span><span class="err">员工名称</span><span class="p">),</span><span class="n">d</span><span class="p">.(</span><span class="err">部门名称</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="k">from</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="p">(</span><span class="err">员工所在部门表</span><span class="p">)</span><span class="w"> </span><span class="n">e</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="k">inner</span><span class="w"> </span><span class="k">join</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="p">(</span><span class="err">部门表</span><span class="p">)</span><span class="w"> </span><span class="n">d</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="k">on</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="n">e</span><span class="p">.(</span><span class="err">员工部门</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">d</span><span class="p">.(</span><span class="err">部门表</span><span class="p">);</span><span class="w"> </span><span class="o">//</span><span class="w"> </span><span class="err">条件是等量关系，所以被称为等值连接。</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>inner关键字可以省略（带着inner可读性会更好，一眼就能看出来是内连接）
+<strong>sql99优点：</strong></p>
+<blockquote>
+<p>表连接的条件是独立的，连接之后，如果还需要进一步筛选，再往后继续添加where</p>
+</blockquote>
+<p><strong>SQL99语法：</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-SQL" data-lang="SQL"><span class="line"><span class="cl"><span class="w">	</span><span class="k">select</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="p">...</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="k">from</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="n">a</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="k">join</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="n">b</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="k">on</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="n">a和b的连接条件</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="k">where</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="err">筛选条件</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="26内连接之非等值连接">2.6、内连接之非等值连接</h4>
+<p>例：找出每个员工的薪资等级，要求显示员工名、薪资、薪资等级？</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-SQL" data-lang="SQL"><span class="line"><span class="cl"><span class="w">	</span><span class="k">select</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="n">e</span><span class="p">.(</span><span class="err">工名</span><span class="p">),</span><span class="n">e</span><span class="p">.(</span><span class="err">薪资</span><span class="p">),</span><span class="n">s</span><span class="p">.(</span><span class="err">薪资等级</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="k">from</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="p">(</span><span class="err">员工表</span><span class="p">)</span><span class="w"> </span><span class="n">e</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="k">inner</span><span class="w"> </span><span class="k">join</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="p">(</span><span class="err">薪资等级表</span><span class="p">)</span><span class="w"> </span><span class="n">s</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="k">on</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="n">e</span><span class="p">.(</span><span class="err">员工薪资</span><span class="p">)</span><span class="w"> </span><span class="k">between</span><span class="w"> </span><span class="n">s</span><span class="p">.(</span><span class="err">最低薪资</span><span class="p">)</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="n">s</span><span class="p">.(</span><span class="err">最高薪资</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="o">//</span><span class="w"> </span><span class="err">条件不是一个等量关系，称为非等值连接。</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="27内连接之自连接">2.7、内连接之自连接</h4>
+<p>例：查询员工的上级领导，要求显示员工名和对应的领导名？
+<strong>自连接：</strong></p>
+<blockquote>
+<p>把一张表看作两张表来查询</p>
+</blockquote>
+<p>员工表李包含了 <strong>领导的员工编号</strong> 与 每个员工的 <strong>上级领导编号</strong>
+把一张员工表看作两张表，使用<strong>别名</strong>区分
+第一张：(员工表) a 员工
+第二章：(员工表) b 领导表</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-SQL" data-lang="SQL"><span class="line"><span class="cl"><span class="w">	</span><span class="k">select</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="n">a</span><span class="p">.(</span><span class="err">名称</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="s1">&#39;员工名&#39;</span><span class="p">,</span><span class="n">b</span><span class="p">.(</span><span class="err">名称</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="s1">&#39;领导名&#39;</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="k">from</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="p">(</span><span class="err">员工表</span><span class="p">)</span><span class="w"> </span><span class="n">a</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="k">inner</span><span class="w"> </span><span class="k">join</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="p">(</span><span class="err">员工表</span><span class="p">)</span><span class="w"> </span><span class="n">b</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="k">on</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="n">a</span><span class="p">.(</span><span class="err">员工领导编号</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">b</span><span class="p">.(</span><span class="err">领导的员工编号</span><span class="p">);</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>重点技巧：</strong></p>
+<blockquote>
+<p>一张表看做两张表。</p>
+</blockquote>
+<h4 id="28外连接">2.8、外连接</h4>
+<p><strong>外连接（右外连接）：</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-SQL" data-lang="SQL"><span class="line"><span class="cl"><span class="w">	</span><span class="k">select</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="n">e</span><span class="p">.(</span><span class="err">名称</span><span class="p">),</span><span class="n">d</span><span class="p">.(</span><span class="err">名称</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="k">from</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="p">(</span><span class="err">员工表</span><span class="p">)</span><span class="w"> </span><span class="n">e</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="k">right</span><span class="w"> </span><span class="k">outer</span><span class="w"> </span><span class="k">join</span><span class="w">  </span><span class="o">//</span><span class="w"> </span><span class="k">outer</span><span class="w"> </span><span class="err">是可以省略的，带着可读性强。</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="p">(</span><span class="err">部门表</span><span class="p">)</span><span class="w"> </span><span class="n">d</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="k">on</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="n">e</span><span class="p">.(</span><span class="err">员工表部门</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">d</span><span class="p">.(</span><span class="err">部门表部门</span><span class="p">);</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>right代表什么：</strong></p>
+<blockquote>
+<p>表示将join关键字右边的这张表看成主表，主要是为了将
+这张表的数据全部查询出来，捎带着关联查询左边的表。
+在外连接当中，两张表连接，产生了主次关系。</p>
+</blockquote>
+<p><strong>外连接（左外连接）：</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-SQL" data-lang="SQL"><span class="line"><span class="cl"><span class="w">	</span><span class="k">select</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="n">e</span><span class="p">.(</span><span class="err">名称</span><span class="p">),</span><span class="n">d</span><span class="p">.(</span><span class="err">名称</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="k">from</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="p">(</span><span class="err">员工表</span><span class="p">)</span><span class="w"> </span><span class="n">e</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="k">left</span><span class="w"> </span><span class="k">outer</span><span class="w"> </span><span class="k">join</span><span class="w">  </span><span class="o">//</span><span class="w"> </span><span class="k">outer</span><span class="w"> </span><span class="err">是可以省略的，带着可读性强。</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="p">(</span><span class="err">部门表</span><span class="p">)</span><span class="w"> </span><span class="n">d</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="k">on</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="n">e</span><span class="p">.(</span><span class="err">员工表部门</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">d</span><span class="p">.(</span><span class="err">部门表部门</span><span class="p">);</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>总结：</strong></p>
+<blockquote>
+<p>带有right的是右外连接，又叫做右连接。
+带有left的是左外连接，又叫做左连接。
+任何一个右连接都有左连接的写法。
+任何一个左连接都有右连接的写法。</p>
+</blockquote>
+<h4 id="29三四张表连接">2.9、三，四张表连接</h4>
+<p><strong>语法：</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-SQL" data-lang="SQL"><span class="line"><span class="cl"><span class="w">		</span><span class="k">select</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w">			</span><span class="p">...</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="k">from</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">			</span><span class="n">a</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="k">join</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">			</span><span class="n">b</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="k">on</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">			</span><span class="n">a和b的连接条件</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="k">join</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">			</span><span class="k">c</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="k">on</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">			</span><span class="n">a和c的连接条件</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="k">right</span><span class="w"> </span><span class="k">join</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">			</span><span class="n">d</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="k">on</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">			</span><span class="n">a和d的连接条件</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>一条SQL中内连接和外连接可以混合。都可以出现！</p>
+<h3 id="3子查询">3、子查询</h3>
+<h4 id="31什么是子查询">3.1、什么是子查询</h4>
+<blockquote>
+<p>select语句中嵌套select语句，被嵌套的select语句称为子查询。</p>
+</blockquote>
+<h4 id="32子查询都可以出现在哪里">3.2、子查询都可以出现在哪里</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-SQL" data-lang="SQL"><span class="line"><span class="cl"><span class="w">	</span><span class="k">select</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="p">..(</span><span class="k">select</span><span class="p">).</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="k">from</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="p">..(</span><span class="k">select</span><span class="p">).</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="k">where</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="p">..(</span><span class="k">select</span><span class="p">).</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>可以出现在 select 后面
+可以出现在 from 后面
+可以出现在 where 后面</p>
+</blockquote>
+<h4 id="33where-子句中的子查询">3.3、where 子句中的子查询</h4>
+<p>例：找出比最低工资高的员工姓名和工资？以下错误案例：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-SQL" data-lang="SQL"><span class="line"><span class="cl"><span class="w">		</span><span class="k">select</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w">			</span><span class="p">(</span><span class="err">姓名</span><span class="p">),(</span><span class="err">工资</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="k">from</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">			</span><span class="err">（员工表</span><span class="p">)</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="k">where</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">			</span><span class="p">(</span><span class="err">工资</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="k">min</span><span class="p">(</span><span class="err">工资</span><span class="p">);</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>以上是错误的，因为在 where 子句中不能直接使用分组函数，可以使用子查询</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-SQL" data-lang="SQL"><span class="line"><span class="cl"><span class="err">先分析题目：</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="err">第一步：查询最低工资是多少</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="k">select</span><span class="w"> </span><span class="k">min</span><span class="p">(</span><span class="err">工资</span><span class="p">)</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="p">(</span><span class="err">表</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="err">第二步：找出</span><span class="o">&gt;</span><span class="err">最低工资的</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="k">select</span><span class="w"> </span><span class="p">(</span><span class="err">姓名</span><span class="p">),(</span><span class="err">工资</span><span class="p">)</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="p">(</span><span class="err">员工表</span><span class="p">)</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="p">(</span><span class="err">工资</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="p">(</span><span class="err">第一步的结果</span><span class="p">)</span><span class="o">//</span><span class="err">最低工资</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="err">第三步：合并</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="k">select</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="p">(</span><span class="err">姓名</span><span class="p">),(</span><span class="err">工资</span><span class="p">)</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="k">from</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="p">(</span><span class="err">员工表</span><span class="p">)</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="k">where</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w">			</span><span class="p">(</span><span class="err">工资</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="p">(</span><span class="k">select</span><span class="w"> </span><span class="k">min</span><span class="p">(</span><span class="err">工资</span><span class="p">)</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="p">(</span><span class="err">员工表</span><span class="p">));</span><span class="w"> </span><span class="o">//</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="err">最低工资</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="34from-子句中的子查询">3.4、from 子句中的子查询</h4>
+<p><strong>注意：</strong></p>
+<blockquote>
+<p>from后面的子查询，可以将子查询的查询结果当做一张临时表。（技巧）</p>
+</blockquote>
+<p>例：找出每个岗位的平均工资的薪资等级。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-SQL" data-lang="SQL"><span class="line"><span class="cl"><span class="w">	</span><span class="err">第一步：找出每个岗位的平均工资（按照岗位分组求平均值）</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="k">select</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="p">(</span><span class="err">岗位</span><span class="p">),</span><span class="k">avg</span><span class="p">((</span><span class="err">工资</span><span class="p">))</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="k">from</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="p">(</span><span class="err">员工表</span><span class="p">)</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="k">group</span><span class="w"> </span><span class="k">by</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="p">(</span><span class="err">岗位</span><span class="p">);</span><span class="w"> </span><span class="o">//</span><span class="err">按照岗位分组</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="err">第二步：把以上的查询结果就当做一张真实存在的表</span><span class="n">t</span><span class="err">。</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="o">```</span><span class="k">SQL</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">salgrade</span><span class="p">;</span><span class="o">//</span><span class="err">工资等级</span><span class="w"> </span><span class="n">s表</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><pre><code>第三步：t表和s表进行表连接，
+条件：t表avg(工资) between s.(最低工资) and s.(最高工资);
+
+select
+	t.*,s.(等级)
+from 
+	(select (岗位),avg(工资) as avgsal from (员工表) group by (岗位)) t	// 别名 t
+join 
+	(工资等级表) s
+on 
+	t.avgasl between s.(最低工资) and s.(最高工资);
+</code></pre>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">#### 3.5、select 后面出现的子查询（了解）
+</span></span><span class="line"><span class="cl">例：找出每个员工员工名称，部门编号，部门名称
+</span></span><span class="line"><span class="cl">```SQL
+</span></span><span class="line"><span class="cl">	select 
+</span></span><span class="line"><span class="cl">		e.(员工姓名),e.(部门编号),
+</span></span><span class="line"><span class="cl">		(select d.(部门名称) from (部门表) d 
+</span></span><span class="line"><span class="cl">		where e.部门编号 = d.(部门编号)) as dname
+</span></span><span class="line"><span class="cl">	from 
+</span></span><span class="line"><span class="cl">		(员工表) e;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>以上 select 出现子查询查出了 部门名称
+<strong>以下错误案例：</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-SQL" data-lang="SQL"><span class="line"><span class="cl"><span class="w">	</span><span class="k">select</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="n">e</span><span class="p">.(</span><span class="err">员工姓名</span><span class="p">),</span><span class="n">e</span><span class="p">.(</span><span class="err">部门编号</span><span class="p">),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="p">(</span><span class="k">select</span><span class="w"> </span><span class="p">(</span><span class="err">部门名称</span><span class="p">)</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="p">(</span><span class="err">部门表</span><span class="p">))</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">dname</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="k">from</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="p">(</span><span class="err">员工表</span><span class="p">)</span><span class="w"> </span><span class="n">e</span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>注意：</strong></p>
+<blockquote>
+<p>对于select后面的子查询来说，这个子查询只能一次返回1条结果，
+多于1条，就会报错</p>
+</blockquote>
+<h3 id="4union-合并查询结果集">4，union 合并查询结果集</h3>
+<p>例：查询工作岗位是MANAGER和SALESMAN的员工
+平常写法：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-SQL" data-lang="SQL"><span class="line"><span class="cl"><span class="w">	</span><span class="k">select</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="p">(</span><span class="err">姓名</span><span class="p">),(</span><span class="err">岗位</span><span class="p">)</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="k">from</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="p">(</span><span class="err">员工表</span><span class="p">)</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="k">where</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="p">(</span><span class="err">岗位</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;MANAGER&#39;</span><span class="w"> </span><span class="k">or</span><span class="w"> </span><span class="p">(</span><span class="err">岗位</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;SALESMAN&#39;</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="o">//</span><span class="err">或者</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="k">select</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="p">(</span><span class="err">姓名</span><span class="p">),(</span><span class="err">岗位</span><span class="p">)</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="k">from</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="p">(</span><span class="err">员工表</span><span class="p">)</span><span class="w">  
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="k">where</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="p">(</span><span class="err">岗位</span><span class="p">)</span><span class="w"> </span><span class="k">in</span><span class="p">(</span><span class="s1">&#39;MANAGER&#39;</span><span class="p">,</span><span class="s1">&#39;SALESMAN&#39;</span><span class="p">);</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>使用 union 合并查询</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-SQL" data-lang="SQL"><span class="line"><span class="cl"><span class="w">	</span><span class="k">select</span><span class="w"> </span><span class="p">(</span><span class="err">姓名</span><span class="p">),(</span><span class="err">岗位</span><span class="p">)</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="p">(</span><span class="err">员工表</span><span class="p">)</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="p">(</span><span class="err">岗位</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;MANAGER&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">union</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">select</span><span class="w"> </span><span class="p">(</span><span class="err">姓名</span><span class="p">),(</span><span class="err">岗位</span><span class="p">)</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="p">(</span><span class="err">员工表</span><span class="p">)</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="p">(</span><span class="err">岗位</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;SALESMAN&#39;</span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>相比较：</strong></p>
+<blockquote>
+<p>union的效率要高一些。对于表连接来说，每连接一次新	表，
+则匹配的次数满足笛卡尔积，成倍的翻。。。
+但是union可以减少匹配的次数。在减少匹配次数的情况下，
+还可以完成两个结果集的拼接。</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">	匹配次数：
+</span></span><span class="line"><span class="cl">          a 连接 b 连接 c
+</span></span><span class="line"><span class="cl">          a 10条记录
+</span></span><span class="line"><span class="cl">          b 10条记录
+</span></span><span class="line"><span class="cl">          c 10条记录
+</span></span><span class="line"><span class="cl">          匹配次数是：1000
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">          a 连接 b一个结果：10 * 10 --&gt; 100次
+</span></span><span class="line"><span class="cl">          a 连接 c一个结果：10 * 10 --&gt; 100次
+</span></span><span class="line"><span class="cl">          使用union的话是：100次 + 100次 = 200次。
+</span></span><span class="line"><span class="cl">          （union把乘法变成了加法运算）
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>union注意事项：</strong>
+1、union在进行结果集合并的时候，要求两个结果集的列数相同。以下错误案例：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-SQL" data-lang="SQL"><span class="line"><span class="cl"><span class="w">	</span><span class="k">select</span><span class="w"> </span><span class="p">(</span><span class="err">姓名</span><span class="p">),(</span><span class="err">岗位</span><span class="p">)</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="p">(</span><span class="err">员工表</span><span class="p">)</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="p">(</span><span class="err">岗位</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;MANAGER&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">union</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">select</span><span class="w"> </span><span class="p">(</span><span class="err">姓名</span><span class="p">)</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="p">(</span><span class="err">员工表</span><span class="p">)</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="p">(</span><span class="err">岗位</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;SALESMAN&#39;</span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>2、结果集合并时列和列的数据类型也要一致。</p>
+<blockquote>
+<p>在MySQL里面可以，oracle 语法比较严格，不可以</p>
+</blockquote>
+<h3 id="5limit重要">5、limit(重要)</h3>
+<h4 id="51limit作用">5.1、limit作用</h4>
+<p><strong>作用：</strong></p>
+<blockquote>
+<p>将查询结果集的一部分取出来。通常使用在分页查询当中。
+<strong>例如：</strong>
+百度默认：一页显示10条记录。</p>
+</blockquote>
+<p><strong>分页的作用：</strong></p>
+<blockquote>
+<p>为了提高用户的体验，因为一次全部都查出来，用户体验差。
+分页可以一页一页翻页看。(类似百度的页数)</p>
+</blockquote>
+<h4 id="52limit的用法">5.2、limit的用法</h4>
+<p><strong>完整用法：</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-SQL" data-lang="SQL"><span class="line"><span class="cl"><span class="w">	</span><span class="k">limit</span><span class="w"> </span><span class="n">startIndex</span><span class="p">,</span><span class="w"> </span><span class="k">length</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="o">//</span><span class="n">startIndex是起始下标</span><span class="err">，</span><span class="n">length是长度</span><span class="err">。</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="o">//</span><span class="err">起始下标从</span><span class="mi">0</span><span class="err">开始。</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>缺省用法：</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-SQL" data-lang="SQL"><span class="line"><span class="cl"><span class="w">	</span><span class="k">limit</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span><span class="w"> </span><span class="o">//</span><span class="err">取出前</span><span class="mi">5</span><span class="err">个值</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>例：按照薪资降序，取出排名在前5名的员工</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-SQL" data-lang="SQL"><span class="line"><span class="cl"><span class="w">	</span><span class="k">select</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="p">(</span><span class="err">姓名</span><span class="p">),(</span><span class="err">工资</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="k">from</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="p">(</span><span class="err">员工表</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="k">order</span><span class="w"> </span><span class="k">by</span><span class="w">	</span><span class="o">//</span><span class="err">工资排序</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="p">(</span><span class="err">工资</span><span class="p">)</span><span class="w"> </span><span class="k">desc</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="k">limit</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span><span class="w">	</span><span class="o">//</span><span class="err">取出前</span><span class="mi">5</span><span class="err">个</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>以下的结果相同：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-SQL" data-lang="SQL"><span class="line"><span class="cl"><span class="w">	</span><span class="k">select</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="p">(</span><span class="err">姓名</span><span class="p">),(</span><span class="err">工资</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="k">from</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="p">(</span><span class="err">员工表</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="k">order</span><span class="w"> </span><span class="k">by</span><span class="w">	</span><span class="o">//</span><span class="err">工资排序</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="p">(</span><span class="err">工资</span><span class="p">)</span><span class="w"> </span><span class="k">desc</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="k">limit</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="mi">5</span><span class="p">;</span><span class="w">	</span><span class="o">//</span><span class="err">取出</span><span class="mi">0</span><span class="err">到</span><span class="mi">5</span><span class="err">个</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="53注意mysql当中limit在order-by之后执行">5.3、注意：mysql当中limit在order by之后执行</h4>
+<h4 id="54取出工资排名在3-5名的员工">5.4、取出工资排名在[3-5]名的员工</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-SQL" data-lang="SQL"><span class="line"><span class="cl"><span class="w">	</span><span class="k">select</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="p">(</span><span class="err">姓名</span><span class="p">),(</span><span class="err">工资</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="k">from</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="p">(</span><span class="err">员工表</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="k">order</span><span class="w"> </span><span class="k">by</span><span class="w">	</span><span class="o">//</span><span class="err">工资排序</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="p">(</span><span class="err">工资</span><span class="p">)</span><span class="w"> </span><span class="k">desc</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="k">limit</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">;</span><span class="w">	</span><span class="o">//</span><span class="err">取出</span><span class="mi">3</span><span class="err">到</span><span class="mi">5</span><span class="err">个</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>注意：</strong></p>
+<blockquote>
+<p>2表示起始位置从下标2开始，就是第三条记录。
+3表示长度。</p>
+</blockquote>
+<h4 id="55分页">5.5、分页</h4>
+<p>每页显示3条记录：</p>
+<blockquote>
+<p>第1页：limit 0,3		[0 1 2]
+第2页：limit 3,3		[3 4 5]
+第3页：limit 6,3		[6 7 8]
+第4页：limit 9,3		[9 10 11]</p>
+</blockquote>
+<p><strong>记分页的公式：</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">	limit ((第几页)-1) * (每页显示的条数) , (每页显示的条数)
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>6、关于DQL语句的大总结：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-SQL" data-lang="SQL"><span class="line"><span class="cl"><span class="w">    </span><span class="k">select</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="p">...</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="k">from</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="p">...</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="k">where</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="p">...</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="k">group</span><span class="w"> </span><span class="k">by</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="p">...</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="k">having</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="p">...</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="k">order</span><span class="w"> </span><span class="k">by</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="p">...</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="k">limit</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="p">...</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>执行顺序：</strong></p>
+<blockquote>
+<p>1、from
+2、where
+3、group by
+4、having
+5、select
+6、order by
+7、limit..</p>
+</blockquote>
+<h3 id="7表的创建建表">7、表的创建(建表)</h3>
+<h4 id="71建表的语法格式建表属于ddl语句ddl包括create-drop-alter">7.1、建表的语法格式：(建表属于DDL语句，DDL包括：create drop alter)</h4>
+<p><strong>语法：</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-SQL" data-lang="SQL"><span class="line"><span class="cl"><span class="k">create</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="p">((</span><span class="err">表名</span><span class="p">))((</span><span class="err">字段名</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="err">数据类型</span><span class="p">,(</span><span class="err">字段名</span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="err">数据类型</span><span class="p">,(</span><span class="err">字段名</span><span class="mi">3</span><span class="p">)</span><span class="w"> </span><span class="err">数据类型</span><span class="p">)</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>可以这样写：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-SQL" data-lang="SQL"><span class="line"><span class="cl"><span class="k">create</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="err">表名</span><span class="p">(</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="err">字段名</span><span class="mi">1</span><span class="w"> </span><span class="err">数据类型</span><span class="p">,</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="err">字段名</span><span class="mi">2</span><span class="w"> </span><span class="err">数据类型</span><span class="p">,</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="err">字段名</span><span class="mi">3</span><span class="w"> </span><span class="err">数据类型</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="p">);</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>命名方式：</strong></p>
+<blockquote>
+<p>表名：建议以t_ 或者 tbl_开始，可读性强。见名知意。
+字段名：见名知意。
+表名和字段名都属于标识符。</p>
+</blockquote>
+<h4 id="72mysql中的数据类型">7.2、mysql中的数据类型</h4>
+<p>常见的数据类型：</p>
+<blockquote>
+<p>1、varchar(最长255)
+2、char(最长255)
+3、int(最长11)
+4、bigint
+5、float
+6、double
+7、date
+8、datetime
+9、clob
+10、blob</p>
+</blockquote>
+<p><strong>说明：</strong>
+<strong>varchar(最长255)：</strong></p>
+<blockquote>
+<p>可变长度的字符串
+比较智能，节省空间。
+会根据实际的数据长度动态分配空间。</p>
+<p>优点：节省空间
+缺点：需要动态分配空间，速度慢。</p>
+</blockquote>
+<p><strong>char(最长255)：</strong></p>
+<blockquote>
+<p>定长字符串
+不管实际的数据长度是多少。
+分配固定长度的空间去存储数据。
+使用不恰当的时候，可能会导致空间的浪费。</p>
+<p>优点：不需要动态分配空间，速度快。
+缺点：使用不当可能会导致空间的浪费。</p>
+</blockquote>
+<p><strong>varchar和char怎么选择：</strong></p>
+<blockquote>
+<p>假如储存性别使用char，因为性别是固定长度的字符串，所以选择char。
+假如储存姓名使用varchar，每一个人的名字长度不同，所以选择varchar。</p>
+</blockquote>
+<p><strong>int(最长11)：</strong></p>
+<blockquote>
+<p>数字中的整数型。等同于java的int。</p>
+</blockquote>
+<p><strong>bigint：</strong></p>
+<blockquote>
+<p>数字中的长整型。等同于java中的long。</p>
+</blockquote>
+<p><strong>float：</strong></p>
+<blockquote>
+<p>单精度浮点型数据</p>
+</blockquote>
+<p><strong>double：</strong></p>
+<blockquote>
+<p>双精度浮点型数据</p>
+</blockquote>
+<p><strong>date：</strong></p>
+<blockquote>
+<p>短日期类型</p>
+</blockquote>
+<p>datetime:</p>
+<blockquote>
+<p>长日期类型</p>
+</blockquote>
+<p><strong>clob：</strong></p>
+<blockquote>
+<p>字符大对象
+最多可以存储4G的字符串。
+比如：存储一篇文章，存储一个说明。
+超过255个字符的都要采用CLOB字符大对象来存储。
+Character Large OBject:CLOB</p>
+</blockquote>
+<p><strong>blob：</strong></p>
+<blockquote>
+<p>二进制大对象
+Binary Large OBject
+专门用来存储图片、声音、视频等流媒体数据。
+往BLOB类型的字段上插入数据的时候，例如插入一个图片、视频等，
+你需要使用IO流才行。</p>
+</blockquote>
+<h4 id="73创建一个学生表">7.3、创建一个学生表</h4>
+<p>学生表有字段：学号、姓名、年龄、性别、邮箱地址</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-SQL" data-lang="SQL"><span class="line"><span class="cl"><span class="k">create</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="n">t_student</span><span class="p">(</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="k">no</span><span class="w"> </span><span class="nb">int</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">name</span><span class="w"> </span><span class="nb">varchar</span><span class="p">(</span><span class="mi">32</span><span class="p">),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">sex</span><span class="w"> </span><span class="nb">char</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">age</span><span class="w"> </span><span class="nb">int</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">email</span><span class="w"> </span><span class="nb">varchar</span><span class="p">(</span><span class="mi">255</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">);</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="74删除表">7.4、删除表</h4>
+<p>删除 t_student 表</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">drop</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="n">t_student</span><span class="p">;</span><span class="w"> </span><span class="o">//</span><span class="w"> </span><span class="err">当这张表不存在的时候会报错！</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">//</span><span class="w"> </span><span class="err">如果这张表存在的话，删除</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">drop</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="k">exists</span><span class="w"> </span><span class="n">t_student</span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="75插入数据-insert-dml">7.5、插入数据 insert (DML)</h4>
+<p><strong>语法格式：</strong></p>
+<blockquote>
+<p>insert into 表名(字段名1,字段名2,字段名3&hellip;) values(值1,值2,值3);</p>
+</blockquote>
+<p><strong>注意：</strong></p>
+<blockquote>
+<p>字段名和值要一一对应，数量要对应。数据类型要对应。</p>
+</blockquote>
+<blockquote>
+<p>insert语句但凡是执行成功了，那么必然会多一条记录。
+没有给其它字段指定值的话，默认值是NULL。</p>
+</blockquote>
+<p>insert语句中的“字段名”可以省略</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-SQL" data-lang="SQL"><span class="line"><span class="cl"><span class="w">	</span><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">t_student</span><span class="w"> </span><span class="k">values</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="s1">&#39;zhangsan&#39;</span><span class="p">,</span><span class="s1">&#39;f&#39;</span><span class="p">,</span><span class="mi">20</span><span class="p">,</span><span class="s1">&#39;zhangsan@qq.com&#39;</span><span class="p">);</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>注意：</strong></p>
+<blockquote>
+<p>前面的字段名省略的话，等于都写上了！所以值也要全部写上</p>
+</blockquote>
+<h4 id="75插入日期">7.5、插入日期</h4>
+<p>数字格式化：format(数字,‘格式’)</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-SQL" data-lang="SQL"><span class="line"><span class="cl"><span class="k">select</span><span class="w"> </span><span class="p">(</span><span class="err">姓名</span><span class="p">),</span><span class="n">format</span><span class="p">((</span><span class="err">工资</span><span class="p">),</span><span class="s1">&#39;$999.999&#39;</span><span class="p">)</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="p">(</span><span class="err">表名</span><span class="p">);</span><span class="w"> </span><span class="o">//</span><span class="err">结果保留三位小数</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>str_to_date(&lsquo;字符串日期&rsquo;, &lsquo;日期格式&rsquo;)：将字符串varchar类型转换成date类型
+date_format(日期类型数据, &lsquo;日期格式&rsquo;)：将date类型转换成具有一定格式的&gt;varchar&gt;字符串类型。</p>
+</blockquote>
+<p>数据库命名规范：所有的标识符都是全部小写，单词和单词之间使用下划线进行衔接。</p>
+<p><strong>mysql的日期格式：</strong></p>
+<blockquote>
+<p>%Y	年
+%m 	月
+%d 	日
+%h	时
+%i	分
+%s	秒</p>
+</blockquote>
+<p><strong>str_to_date：</strong></p>
+<blockquote>
+<p>函数可以把字符串varchar转换成日期date类型数据，
+通常使用在插入insert方面，因为插入的时候需要一个日期类型的数据，
+需要通过该函数将字符串转换成date。</p>
+</blockquote>
+<p>如果提供的日期字符串是这个格式，str_to_date函数就不需要了</p>
+<blockquote>
+<p>%Y-%m-%d</p>
+</blockquote>
+<p><strong>date_format：</strong></p>
+<blockquote>
+<p>date_format 函数可以将日期类型转换成特定格式的字符串。</p>
+</blockquote>
+<p><strong>注意：</strong></p>
+<blockquote>
+<p>mysql默认的日期格式：&rsquo;%Y-%m-%d&rsquo;</p>
+</blockquote>
+<h4 id="76date-和-datetime-两个类型的区别">7.6、date 和 datetime 两个类型的区别</h4>
+<p><strong>区别：</strong></p>
+<blockquote>
+<p>date是短日期：只包括年月日信息。
+datetime是长日期：包括年月日时分秒信息。</p>
+</blockquote>
+<p><strong>默认格式：</strong></p>
+<blockquote>
+<p>mysql短日期默认格式：%Y-%m-%d
+mysql长日期默认格式：%Y-%m-%d %h:%i:%s</p>
+</blockquote>
+<p><strong>获取当前时间：</strong></p>
+<blockquote>
+<p>在mysql中获取系统当前时间可以使用 now() 函数，获取的时间带有：时分秒信息，是&gt;datetime类型的。</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-SQL" data-lang="SQL"><span class="line"><span class="cl"><span class="w">	</span><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="n">t_user</span><span class="p">(</span><span class="n">id</span><span class="p">,</span><span class="n">name</span><span class="p">,</span><span class="n">birth</span><span class="p">,</span><span class="n">create_time</span><span class="p">)</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="k">values</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="s1">&#39;zhangsan&#39;</span><span class="p">,</span><span class="s1">&#39;1991-10-01&#39;</span><span class="p">,</span><span class="n">now</span><span class="p">())</span><span class="o">//</span><span class="n">now</span><span class="p">()</span><span class="err">当前系统时间</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="77修改updatedml">7.7、修改update(DML)</h4>
+<p><strong>语法：</strong></p>
+<blockquote>
+<p>update 表名 set 字段名1=值1,字段名2=值2,字段名3=值3&hellip; where 条件;</p>
+</blockquote>
+<p><strong>注意：</strong></p>
+<blockquote>
+<p>没有条件限制会导致所有数据全部更新。
+带条件的话修改的就是与条件相符合的字段
+= 号右边的值更新左边的字段</p>
+</blockquote>
+<h4 id="78删除数据-delete-dml">7.8、删除数据 delete (DML)</h4>
+<p><strong>语法：</strong></p>
+<blockquote>
+<p>delete from 表名 where 条件;</p>
+</blockquote>
+<p><strong>注意：</strong></p>
+<blockquote>
+<p>没有条件，整张表的数据会全部删除！
+带条件的话删除的就是与条件相符合的记录</p>
+</blockquote>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a>
+        
+            <a href="/tags/sql/">Sql</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+</article>
+
+    
+
+    
+
+<aside class="related-contents--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-contents">
+        <div class="flex article-list--tile">
+            
+                
+<article class="has-image">
+    <a href="/posts/mysql-day01%E7%AC%94%E8%AE%B003/">
+        
+        
+            <div class="article-image">
+                <img src="/posts/mysql-day01%E7%AC%94%E8%AE%B003/mysql03%E7%AC%94%E8%AE%B0%E5%B0%81%E9%9D%A2.2e9c4114458a2db7432e9bf9a03b43a8_hu7573ae13fd1debb8cdc8431c54ec1cb8_473420_250x150_fill_box_smart1_3.png" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post myaql bay03学习笔记"
+                        
+                        data-hash="md5-LpxBFEWKLbdDLpv5oDtDqA==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">myaql bay03学习笔记</h2>
+        </div>
+    </a>
+</article>
+            
+                
+<article class="has-image">
+    <a href="/posts/mysql-day01%E7%AC%94%E8%AE%B001/">
+        
+        
+            <div class="article-image">
+                <img src="/posts/mysql-day01%E7%AC%94%E8%AE%B001/mysql01%E7%AC%94%E8%AE%B0%E5%B0%81%E9%9D%A2.976bbdb9018cc05d92695728a1c6bc00_hu1b772fce74909e5272388430c6e346f6_64134_250x150_fill_q75_box_smart1.jpeg" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post myaql bay01学习笔记"
+                        
+                        data-hash="md5-l2u9uQGMwF2SaVcooca8AA==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">myaql bay01学习笔记</h2>
+        </div>
+    </a>
+</article>
+            
+                
+<article class="has-image">
+    <a href="/posts/mysql-day01%E7%AC%94%E8%AE%B004/">
+        
+        
+            <div class="article-image">
+                <img src="/posts/mysql-day01%E7%AC%94%E8%AE%B004/mysql04%E7%AC%94%E8%AE%B0%E5%B0%81%E9%9D%A2.48e03ebe32236c825039087bffb52000_hu3fc71e4c8e08c2b9f564ebeadadf581e_746685_250x150_fill_q75_box_smart1.jpeg" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post myaql bay04学习笔记"
+                        
+                        data-hash="md5-SOA&#43;vjIjbIJQOQh7/7UgAA==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">myaql bay04学习笔记</h2>
+        </div>
+    </a>
+</article>
+            
+                
+<article class="has-image">
+    <a href="/posts/redis%E7%AC%94%E8%AE%B0/">
+        
+        
+            <div class="article-image">
+                <img src="/posts/redis%E7%AC%94%E8%AE%B0/Redis%E7%AC%94%E8%AE%B0%E5%B0%81%E9%9D%A2.d60749cd5837e176aaa65144adb989c7_hu667a4f12021b9fa2b935caca2429e362_648718_250x150_fill_q75_box_smart1.jpg" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post Redis学习笔记"
+                        
+                        data-hash="md5-1gdJzVg34XaqplFErbmJxw==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Redis学习笔记</h2>
+        </div>
+    </a>
+</article>
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    <div class="disqus-container">
+    <div id="disqus_thread"></div>
+<script type="application/javascript">
+    window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "hugo-theme-stack" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+
+<style>
+    .disqus-container {
+        background-color: var(--card-background);
+        border-radius: var(--card-border-radius);
+        box-shadow: var(--shadow-l1);
+        padding: var(--card-padding);
+    }
+</style>
+
+<script>
+    window.addEventListener('onColorSchemeChange', (e) => {
+        if (DISQUS) {
+            DISQUS.reset({
+                reload: true
+            });
+        }
+    })
+</script>
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2020 - 
+        
+        2022 kitty_Happy
+    </section>
+    
+    <section class="powerby">
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.11.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css"integrity="sha256-c0uckgykQ9v5k&#43;IqViZOZKc47Jn7KQil4/MP3ySA3F8="crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css"integrity="sha256-SBLU4vv6CA6lHsZ1XyTdhyjJxCjPif/TRkjnsyGAGnE="crossorigin="anonymous"
+            >
+
+            </main>
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li>
+      <ol>
+        <li><a href="#1把查询结果去除重复记录">1、把查询结果去除重复记录</a></li>
+        <li><a href="#2连接查询">2、连接查询</a>
+          <ol>
+            <li><a href="#21什么是连接查询">2.1、什么是连接查询？</a></li>
+            <li><a href="#22连接查询的分类">2.2、连接查询的分类</a></li>
+            <li><a href="#23笛卡尔积现象">2.3、笛卡尔积现象</a></li>
+            <li><a href="#24避免笛卡尔积现象">2.4、避免笛卡尔积现象</a></li>
+            <li><a href="#25内连接之等值连接">2.5、内连接之等值连接</a></li>
+            <li><a href="#26内连接之非等值连接">2.6、内连接之非等值连接</a></li>
+            <li><a href="#27内连接之自连接">2.7、内连接之自连接</a></li>
+            <li><a href="#28外连接">2.8、外连接</a></li>
+            <li><a href="#29三四张表连接">2.9、三，四张表连接</a></li>
+          </ol>
+        </li>
+        <li><a href="#3子查询">3、子查询</a>
+          <ol>
+            <li><a href="#31什么是子查询">3.1、什么是子查询</a></li>
+            <li><a href="#32子查询都可以出现在哪里">3.2、子查询都可以出现在哪里</a></li>
+            <li><a href="#33where-子句中的子查询">3.3、where 子句中的子查询</a></li>
+            <li><a href="#34from-子句中的子查询">3.4、from 子句中的子查询</a></li>
+          </ol>
+        </li>
+        <li><a href="#4union-合并查询结果集">4，union 合并查询结果集</a></li>
+        <li><a href="#5limit重要">5、limit(重要)</a>
+          <ol>
+            <li><a href="#51limit作用">5.1、limit作用</a></li>
+            <li><a href="#52limit的用法">5.2、limit的用法</a></li>
+            <li><a href="#53注意mysql当中limit在order-by之后执行">5.3、注意：mysql当中limit在order by之后执行</a></li>
+            <li><a href="#54取出工资排名在3-5名的员工">5.4、取出工资排名在[3-5]名的员工</a></li>
+            <li><a href="#55分页">5.5、分页</a></li>
+          </ol>
+        </li>
+        <li><a href="#7表的创建建表">7、表的创建(建表)</a>
+          <ol>
+            <li><a href="#71建表的语法格式建表属于ddl语句ddl包括create-drop-alter">7.1、建表的语法格式：(建表属于DDL语句，DDL包括：create drop alter)</a></li>
+            <li><a href="#72mysql中的数据类型">7.2、mysql中的数据类型</a></li>
+            <li><a href="#73创建一个学生表">7.3、创建一个学生表</a></li>
+            <li><a href="#74删除表">7.4、删除表</a></li>
+            <li><a href="#75插入数据-insert-dml">7.5、插入数据 insert (DML)</a></li>
+            <li><a href="#75插入日期">7.5、插入日期</a></li>
+            <li><a href="#76date-和-datetime-两个类型的区别">7.6、date 和 datetime 两个类型的区别</a></li>
+            <li><a href="#77修改updatedml">7.7、修改update(DML)</a></li>
+            <li><a href="#78删除数据-delete-dml">7.8、删除数据 delete (DML)</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.5/dist/vibrant.min.js"integrity="sha256-5NovOZc4iwiAWTYIFiIM7DxKUXKWvpVEuMEPLzcm5/g="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

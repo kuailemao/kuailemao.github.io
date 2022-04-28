@@ -1,16 +1,68 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  
-  <sitemap>
-    <loc>https://example.com/en/sitemap.xml</loc>
-    
-      <lastmod>2022-04-28T01:00:00+02:00</lastmod>
-    
-  </sitemap>
-  
-  <sitemap>
-    <loc>https://example.com/zh-cn/sitemap.xml</loc>
-    
-  </sitemap>
-  
-</sitemapindex>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://example.com/categories/</loc>
+    <lastmod>2022-04-28T10:28:00+02:00</lastmod>
+  </url><url>
+    <loc>https://example.com/tags/java/</loc>
+    <lastmod>2022-04-28T10:28:00+02:00</lastmod>
+  </url><url>
+    <loc>https://example.com/categories/java/</loc>
+    <lastmod>2022-04-28T10:28:00+02:00</lastmod>
+  </url><url>
+    <loc>https://example.com/</loc>
+    <lastmod>2022-04-28T10:28:00+02:00</lastmod>
+  </url><url>
+    <loc>https://example.com/posts/</loc>
+    <lastmod>2022-04-28T10:28:00+02:00</lastmod>
+  </url><url>
+    <loc>https://example.com/posts/servlet%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/</loc>
+    <lastmod>2022-04-28T10:28:00+02:00</lastmod>
+  </url><url>
+    <loc>https://example.com/tags/</loc>
+    <lastmod>2022-04-28T10:28:00+02:00</lastmod>
+  </url><url>
+    <loc>https://example.com/tags/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/</loc>
+    <lastmod>2022-04-28T10:28:00+02:00</lastmod>
+  </url><url>
+    <loc>https://example.com/categories/nosql%E6%95%B0%E6%8D%AE%E5%BA%93/</loc>
+    <lastmod>2022-04-28T10:27:00+02:00</lastmod>
+  </url><url>
+    <loc>https://example.com/categories/redis/</loc>
+    <lastmod>2022-04-28T10:27:00+02:00</lastmod>
+  </url><url>
+    <loc>https://example.com/posts/redis%E7%AC%94%E8%AE%B0/</loc>
+    <lastmod>2022-04-28T10:27:00+02:00</lastmod>
+  </url><url>
+    <loc>https://example.com/tags/sql/</loc>
+    <lastmod>2022-04-28T10:27:00+02:00</lastmod>
+  </url><url>
+    <loc>https://example.com/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/</loc>
+    <lastmod>2022-04-28T10:27:00+02:00</lastmod>
+  </url><url>
+    <loc>https://example.com/posts/mysql-day01%E7%AC%94%E8%AE%B001/</loc>
+    <lastmod>2022-04-28T10:12:00+02:00</lastmod>
+  </url><url>
+    <loc>https://example.com/posts/mysql-day01%E7%AC%94%E8%AE%B002/</loc>
+    <lastmod>2022-04-28T10:12:00+02:00</lastmod>
+  </url><url>
+    <loc>https://example.com/posts/mysql-day01%E7%AC%94%E8%AE%B003/</loc>
+    <lastmod>2022-04-28T10:12:00+02:00</lastmod>
+  </url><url>
+    <loc>https://example.com/posts/mysql-day01%E7%AC%94%E8%AE%B004/</loc>
+    <lastmod>2022-04-28T10:12:00+02:00</lastmod>
+  </url><url>
+    <loc>https://example.com/categories/mysql/</loc>
+    <lastmod>2022-04-28T10:12:00+02:00</lastmod>
+  </url><url>
+    <loc>https://example.com/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/</loc>
+    <lastmod>2022-04-28T10:12:00+02:00</lastmod>
+  </url><url>
+    <loc>https://example.com/posts/java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/</loc>
+    <lastmod>2022-04-28T09:49:00+02:00</lastmod>
+  </url><url>
+    <loc>https://example.com/tags/%E7%AC%94%E8%AE%B0/</loc>
+    <lastmod>2022-04-28T09:49:00+02:00</lastmod>
+  </url>
+</urlset>
