@@ -6,10 +6,10 @@
         <description>Recent content in Tags on kitty_Happy</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
-        <lastBuildDate>Thu, 28 Apr 2022 10:28:00 +0200</lastBuildDate><atom:link href="https://example.com/tags/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Fri, 06 May 2022 04:17:00 +0200</lastBuildDate><atom:link href="https://example.com/tags/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>Java</title>
         <link>https://example.com/tags/java/</link>
-        <pubDate>Thu, 28 Apr 2022 10:28:00 +0200</pubDate>
+        <pubDate>Fri, 06 May 2022 04:17:00 +0200</pubDate>
         
         <guid>https://example.com/tags/java/</guid>
         <description></description>
@@ -17,9 +17,17 @@
         <item>
         <title>编程语言</title>
         <link>https://example.com/tags/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/</link>
-        <pubDate>Thu, 28 Apr 2022 10:28:00 +0200</pubDate>
+        <pubDate>Fri, 06 May 2022 04:17:00 +0200</pubDate>
         
         <guid>https://example.com/tags/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>JDBC</title>
+        <link>https://example.com/tags/jdbc/</link>
+        <pubDate>Fri, 06 May 2022 04:06:00 +0200</pubDate>
+        
+        <guid>https://example.com/tags/jdbc/</guid>
         <description></description>
         </item>
         <item>
