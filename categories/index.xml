@@ -6,7 +6,15 @@
         <description>Recent content in Categories on kitty_Happy</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
-        <lastBuildDate>Mon, 09 May 2022 08:36:00 +0200</lastBuildDate><atom:link href="https://example.com/categories/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sun, 12 Jun 2022 11:32:00 +0000</lastBuildDate><atom:link href="https://example.com/categories/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Maven</title>
+        <link>https://example.com/categories/maven/</link>
+        <pubDate>Sun, 12 Jun 2022 11:32:00 +0000</pubDate>
+        
+        <guid>https://example.com/categories/maven/</guid>
+        <description></description>
+        </item>
+        <item>
         <title>JavaScript</title>
         <link>https://example.com/categories/javascript/</link>
         <pubDate>Mon, 09 May 2022 08:36:00 +0200</pubDate>

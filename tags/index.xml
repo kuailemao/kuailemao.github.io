@@ -6,7 +6,15 @@
         <description>Recent content in Tags on kitty_Happy</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
-        <lastBuildDate>Mon, 09 May 2022 08:36:00 +0200</lastBuildDate><atom:link href="https://example.com/tags/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sun, 12 Jun 2022 11:32:00 +0000</lastBuildDate><atom:link href="https://example.com/tags/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>编程工具</title>
+        <link>https://example.com/tags/%E7%BC%96%E7%A8%8B%E5%B7%A5%E5%85%B7/</link>
+        <pubDate>Sun, 12 Jun 2022 11:32:00 +0000</pubDate>
+        
+        <guid>https://example.com/tags/%E7%BC%96%E7%A8%8B%E5%B7%A5%E5%85%B7/</guid>
+        <description></description>
+        </item>
+        <item>
         <title>JavaScript</title>
         <link>https://example.com/tags/javascript/</link>
         <pubDate>Mon, 09 May 2022 08:36:00 +0200</pubDate>
